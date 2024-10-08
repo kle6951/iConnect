@@ -1,7 +1,6 @@
 import React from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
 import GroupScreen from "../screens/GroupScreen";
 import AccountScreen from "../screens/AccountScreen";
@@ -24,6 +23,8 @@ const AppNavigator = () => (
     <Tab.Screen
       name="Group"
       component={GroupScreen}
+
+      // linking the custom group button to the Group Screen
       options={({ navigation }) => ({
         tabBarButton: () => (
           <GroupButton onPress={() => navigation.navigate("Group")} />
