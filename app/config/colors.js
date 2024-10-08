@@ -2,5 +2,6 @@
 export default {
     primary: '#00b1ff',
     secondary: '#4ecdc4',
-    screenWhite: '#f1f0eb',
+    screenWhite: '#f8f8f4',
+    white: '#ffff',
 };
