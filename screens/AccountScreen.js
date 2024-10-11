@@ -5,7 +5,7 @@ import { StyleSheet, View, FlatList } from "react-native";
 import colors from "../app/config/colors";
 import Icon from "../components/Icon";
 import { AntDesign } from "@expo/vector-icons";
-import ListItemSeperator from "../components/listItemSeperator";
+import ListItemSeperator from "../components/ListItemSeperator";
 
 const menuItems = [
   {
