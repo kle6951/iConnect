@@ -4,7 +4,7 @@ import ListItem from "../components/ListItem";
 import { StyleSheet, View, FlatList } from "react-native";
 import colors from "../app/config/colors";
 import Icon from "../components/Icon";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import ListItemSeperator from "../components/ListItemSeperator";
 
 const menuItems = [
@@ -27,6 +27,14 @@ const menuItems = [
     title: "Saved",
     icon: {
       name: "archive",
+      backgroundColor: colors.primary,
+    },
+  },
+  {
+    title: "Support",
+    icon: {
+      ComponentName: MaterialIcons,
+      name: "support-agent",
       backgroundColor: colors.primary,
     },
   },
