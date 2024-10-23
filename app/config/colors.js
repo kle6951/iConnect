@@ -5,5 +5,6 @@ export default {
   screenWhite: "#f8f8f4",
   white: "#ffff",
   grey: "#6e6969",
-  lightGrey: '#f8f4f4',
+  lightGrey: "#f8f4f4",
+  darkGrey: "#0c0c0c",
 };
