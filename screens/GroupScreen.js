@@ -1,5 +1,5 @@
 import React from "react";
-import GroupCard from "../components/GroupCard";
+import GroupCard from "../components/cards/GroupCard";
 import Screen from "../components/Screen";
 import { FlatList, StyleSheet } from "react-native";
 

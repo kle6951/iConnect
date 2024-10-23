@@ -1,11 +1,8 @@
 import React from "react";
 import { StyleSheet, Image } from "react-native";
-import Screen from "./Screen";
-import { Formik } from "formik";
+import Screen from "../components/Screen";
 import * as Yup from "yup";
-import AppFormField from "./AppFormField";
-import SubmitButton from "./SubmitButton";
-import AppForm from "./AppForm";
+import { AppFormField, SubmitButton, AppForm } from "../components/forms";
 
 /* Use Formik to reduce code the complexity when handling multiple text input
 so we can remove useState */

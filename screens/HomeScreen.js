@@ -1,7 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 import colors from "../app/config/colors";
-import Card from "../components/Card";
+import Card from "../components/cards/Card";
 import Screen from "../components/Screen";
 
 // Waiting for backend API. This is temporary data

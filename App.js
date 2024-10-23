@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react-native'
 import NavigationTheme from './navigation/NavigationTheme';
 import AppNavigator from './navigation/AppNavigator';
-import LoginScreen from './components/LoginScreen';
+import LoginScreen from './screens/LoginScreen';
 
 // Main App component
 export default function App() {

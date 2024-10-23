@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Image, TouchableHighlight } from "react-native";
-import AppText from "./AppText";
-import colors from "../app/config/colors";
+import AppText from "../AppText";
+import colors from "../../app/config/colors";
 
 function ListItem({ title, description, image, IconComponent, onPress }) {
   return (

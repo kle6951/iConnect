@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Image } from "react-native";
-import colors from "../app/config/colors";
-import AppText from "./AppText";
+import colors from "../../app/config/colors";
+import AppText from "../AppText";
 
 function GroupCard({ image, groupName }) {
   return (
