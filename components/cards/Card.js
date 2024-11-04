@@ -8,8 +8,12 @@ function Card({ title, description, image }) {
     <View style={styles.card}>
       <Image style={styles.image} source={image} />
       <View style={styles.detailedContainer}>
-        <AppText style={styles.title}>{title}</AppText>
-        <AppText style={styles.description}>{description}</AppText>
+        <AppText style={styles.title} numberOfLines={1}>
+          {title}
+        </AppText>
+        <AppText style={styles.description} numberOfLines={5}>
+          {description}
+        </AppText>
       </View>
     </View>
   );
@@ -20,11 +24,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: colors.white,
     marginBottom: 20,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
-  description:{
-
-  },
+  description: {},
   detailedContainer: {
     // will implement later for long description holder
   },

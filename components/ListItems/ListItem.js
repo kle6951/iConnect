@@ -3,7 +3,14 @@ import { View, StyleSheet, Image, TouchableHighlight } from "react-native";
 import AppText from "../AppText";
 import colors from "../../app/config/colors";
 
-function ListItem({ title, description, image, IconComponent, onPress }) {
+function ListItem({
+  title,
+  description,
+  image,
+  IconComponent,
+  onPress,
+  renderRightActions,
+}) {
   return (
     <TouchableHighlight underlayColor={colors.screenWhite} onPress={onPress}>
       <View style={styles.container}>

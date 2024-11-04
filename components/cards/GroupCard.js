@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     height: 100,
     borderRadius: 25,
-    marginBottom: 15,
+    marginBottom: 10,
     overflow: "hidden", // Ensures rounded corners for the image and the container
   },
   groupName: {
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginLeft: 15,
     marginRight: 15,
-    textAlign: 'left',
+    textAlign: "left",
   },
   image: {
     width: "100%",
