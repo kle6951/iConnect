@@ -29,14 +29,16 @@ function ListItem({
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: "center",
     flexDirection: "row",
-    padding: 15,
+    padding: 5,
     backgroundColor: colors.white,
   },
   description: {
     color: colors.medium,
   },
   detailedContainer: {
+    flex: 1,
     marginLeft: 10,
     justifyContent: "center",
   },
