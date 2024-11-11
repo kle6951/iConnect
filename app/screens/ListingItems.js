@@ -10,13 +10,13 @@ const listings = [
     id: 1,
     title: "Nursing/ Accounting/ Japanese/ Textbooks for sale",
     description: "$10",
-    image: require("../app/assets/textbook_02.jpg"),
+    image: require("../assets/textbook_02.jpg"),
   },
   {
     id: 2,
     title: "Economic Textbooks",
     description: "$5",
-    image: require("../app/assets/oldTextbook.jpg"),
+    image: require("../assets/oldTextbook.jpg"),
   },
 ];
 
@@ -25,19 +25,19 @@ const newlistings = [
     id: 1,
     title: "Nursing/ Accounting/ Japanese/ Textbooks for sale",
     description: "$10",
-    image: require("../app/assets/textbook_02.jpg"),
+    image: require("../assets/textbook_02.jpg"),
   },
   {
     id: 2,
     title: "Economic Textbooks",
     description: "$5",
-    image: require("../app/assets/oldTextbook.jpg"),
+    image: require("../assets/oldTextbook.jpg"),
   },
   {
     id: 3,
     title: "Finance Textbooks",
     description: "FREE",
-    image: require("../app/assets/financeBooks.jpg"),
+    image: require("../assets/financeBooks.jpg"),
   },
 ];
 

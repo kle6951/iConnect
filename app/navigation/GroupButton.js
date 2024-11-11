@@ -20,10 +20,13 @@ const styles = StyleSheet.create({
     borderColor: "#ffff",
     borderWidth: 10,
     borderRadius: 40,
-    bottom: 20,
+    position: "absolute",
+    left: "50%",
+    bottom: -60, // Adjust this to move the button within the tab bar
+    transform: [{ translateX: -40 }], // Center the button horizontally
     height: 80,
-    justifyContent: "center",
     width: 80,
+    justifyContent: "center",
   },
 });
 

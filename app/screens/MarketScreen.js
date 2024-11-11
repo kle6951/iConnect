@@ -19,18 +19,24 @@ const marketListing = [
 
 const categories = ["Clubs", "Markets"];
 
-function MarketScreen(props) {
+function MarketScreen({ navigation }) {
   const [showCategories, setShowCategories] = useState(false);
-  const slideAnim = useRef(new Animated.Value(-150)).current; // Initial position off-screen to the left
+  const slideAnim = useRef(new Animated.Value(-150)).current;
 
   const handlePress = () => {
     setShowCategories(!showCategories);
     Animated.timing(slideAnim, {
-      toValue: showCategories ? -150 : 0, // Slide in or out based on `showCategories`
+      toValue: showCategories ? -150 : 0,
       duration: 300,
       easing: Easing.out(Easing.ease),
       useNativeDriver: true,
     }).start();
+  };
+
+  // MarketScreen.js
+  const handleGroupPress = (groupName) => {
+    // Navigate to ListingItems with groupName as a parameter
+    navigation.navigate("ListingItems", { groupName });
   };
 
   return (
@@ -62,7 +68,11 @@ function MarketScreen(props) {
         data={marketListing}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <GroupCard groupName={item.groupName} image={item.image} />
+          <GroupCard
+            groupName={item.groupName}
+            image={item.image}
+            onPress={() => handleGroupPress(item.groupName)}
+          />
         )}
       />
     </Screen>
@@ -76,15 +86,14 @@ const styles = StyleSheet.create({
   buttonRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 10, // Add margin for spacing between the button row and the FlatList
+    marginBottom: 10,
   },
   animatedContainer: {
     flexDirection: "row",
-    marginLeft: 10, // Space between the main button and the sliding list
+    marginLeft: 10,
   },
   listButton: {
-    marginHorizontal: 5, // Adds space on both left and right of each ListButton
+    marginHorizontal: 5,
   },
 });
-
 export default MarketScreen;

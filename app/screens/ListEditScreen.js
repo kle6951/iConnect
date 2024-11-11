@@ -16,6 +16,7 @@ import {
   AntDesign,
   FontAwesome6,
 } from "@expo/vector-icons";
+import useLocation from "../hooks/useLocation";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -62,7 +63,8 @@ const categories = [
     IconComponentName: FontAwesome6,
   },
 ];
-function ListEditScreen(props) {
+function ListEditScreen() {
+  const location = useLocation();
   return (
     <Screen>
       <AppForm

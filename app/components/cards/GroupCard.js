@@ -1,17 +1,19 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import colors from "../../config/colors";
 import AppText from "../AppText";
 
-function GroupCard({ image, groupName }) {
+function GroupCard({ image, groupName, onPress }) {
   return (
-    <View style={styles.container}>
-      <Image source={image} style={styles.image} />
-      <View style={styles.overlay} />
-      <View style={styles.textContainer}>
-        <AppText style={styles.groupName}>{groupName}</AppText>
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.container}>
+        <Image source={image} style={styles.image} />
+        <View style={styles.overlay} />
+        <View style={styles.textContainer}>
+          <AppText style={styles.groupName}>{groupName}</AppText>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

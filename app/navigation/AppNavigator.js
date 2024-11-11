@@ -1,17 +1,23 @@
-import React from "react-native";
+import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
-// import GroupScreen from "../screens/GroupScreen";
-import MarketScreen from "../screens/MarketScreen";
 import AccountScreen from "../screens/AccountScreen";
 import GroupButton from "./GroupButton";
+import GroupNavigator from "./GroupNavigator";
 
 // creates a bottom tab navigator
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => (
-  <Tab.Navigator>
+  <Tab.Navigator
+    tabBarOptions={{
+      style: {
+        height: 80, // Adjust the height of the tab bar to fit the button
+        paddingBottom: 10, // Make space for the button at the bottom of the tab bar
+      },
+    }}
+  >
     <Tab.Screen
       name="Home"
       component={HomeScreen}
@@ -19,12 +25,12 @@ const AppNavigator = () => (
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="home" color={color} size={size} />
         ),
+        headerShown: false,
       }}
     />
     <Tab.Screen
       name="Group"
-      component={MarketScreen}
-      // linking the custom group button to the Group Screen
+      component={GroupNavigator}
       options={({ navigation }) => ({
         tabBarButton: () => (
           <GroupButton onPress={() => navigation.navigate("Group")} />
@@ -32,6 +38,7 @@ const AppNavigator = () => (
         tabBarIcon: ({ color, size }) => (
           <AntDesign name="upcircle" color={color} size={size} />
         ),
+        headerShown: false,
       })}
     />
     <Tab.Screen
@@ -41,8 +48,10 @@ const AppNavigator = () => (
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="account" color={color} size={size} />
         ),
+        headerShown: false,
       }}
     />
   </Tab.Navigator>
 );
+
 export default AppNavigator;

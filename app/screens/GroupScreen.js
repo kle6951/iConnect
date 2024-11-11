@@ -7,37 +7,37 @@ const groupListing = [
   {
     id: 1,
     groupName: "Mount Royal Skiing Club",
-    image: require("../app/assets/SkiClub.jpg"),
+    image: require("../assets/SkiClub.jpg"),
   },
   {
     id: 2,
     groupName: "International Student Club",
-    image: require("../app/assets/internationalClub.jpg"),
+    image: require("../assets/internationalClub.jpg"),
   },
   {
     id: 3,
     groupName: "MRU Gaming Club",
-    image: require("../app/assets/gamingClub.webp"),
+    image: require("../assets/gamingClub.webp"),
   },
   {
     id: 4,
     groupName: "Computing Alliance of Mount Royal University",
-    image: require("../app/assets/computingAlliance.png"),
+    image: require("../assets/computingAlliance.png"),
   },
   {
     id: 5,
     groupName: "Women In Business",
-    image: require("../app/assets/womenInBusiness.webp"),
+    image: require("../assets/womenInBusiness.webp"),
   },
   {
     id: 6,
     groupName: "Society of Broadcasting",
-    image: require("../app/assets/broadcastingSociety.jpg"),
+    image: require("../assets/broadcastingSociety.jpg"),
   },
   {
     id: 7,
     groupName: "MRU Smash",
-    image: require("../app/assets/smashClub.jpeg"),
+    image: require("../assets/smashClub.jpeg"),
   },
 ];
 
