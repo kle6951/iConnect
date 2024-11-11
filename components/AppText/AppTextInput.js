@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, TextInput } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../../app/config/colors";
-import defaultStyles from "./styles";
+import defaultStyles from "../../app/config/styles";
 
 function AppTextInput({ icon, ...otherProps }) {
   // icon is optional therefore icon & __

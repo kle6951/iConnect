@@ -1,6 +1,6 @@
 import React from "react";
 import { Text } from "react-native";
-import defaultStyles from "./styles";
+import defaultStyles from "../../app/config/styles";
 
 function AppText({ children, style, ...otherProps}) {
   // making an array[styles.text, style] to have additional style

@@ -14,7 +14,7 @@ import UserInfoScreen from "./screens/userInfoScreen";
 
 // Main App component
 export default function App() {
-  // const [imageUris, setImageUris] = useState([]);
+  const [imageUris, setImageUris] = useState([]);
   // const handleAdd = (uri) => {
   //   setImageUris([...imageUris, uri]);
   // };
@@ -22,9 +22,9 @@ export default function App() {
   //   setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
   // };
   return (
-    // <NavigationContainer theme={NavigationTheme}>
-    //   <AppNavigator />
-    // </NavigationContainer>
+    <NavigationContainer theme={NavigationTheme}>
+      <AppNavigator />
+    </NavigationContainer>
     // <ListingDetailScreen />
     // <ListingItems/>
     // <Screen>
@@ -34,6 +34,6 @@ export default function App() {
     //     onRemoveImage={handleRemove}
     //   />
     // </Screen>
-    <UserInfoScreen/>
+    // <UserInfoScreen />
   );
 }
