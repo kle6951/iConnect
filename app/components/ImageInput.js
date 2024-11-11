@@ -6,7 +6,7 @@ import {
   Alert,
   Image,
 } from "react-native";
-import colors from "../app/config/colors";
+import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 

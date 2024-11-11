@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import Screen from "../components/Screen";
 import Card from "../components/cards/Card";
-import colors from "../app/config/colors"; // Make sure colors are imported
+import colors from "../config/colors"; // Make sure colors are imported
 
 // Temporary data
 const listings = [

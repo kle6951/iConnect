@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, FlatList } from "react-native";
-import colors from "../app/config/colors";
+import colors from "../config/colors";
 import Card from "../components/cards/Card";
 import Screen from "../components/Screen";
 
@@ -10,19 +10,19 @@ const listings = [
     id: 1,
     title: "MRU open house is coming soon",
     description: "A beautiful view of the MRU Campus.....",
-    image: require("../app/assets/mruCampus.jpg"),
+    image: require("../assets/mruCampus.jpg"),
   },
   {
     id: 2,
     title: "New Club Events",
     description: "You are invited to attend.....",
-    image: require("../app/assets/mruClub.webp"),
+    image: require("../assets//mruClub.webp"),
   },
   {
     id: 3,
     title: "Basketball Game Tonight 🔥",
     description: "Don't forget to come .....",
-    image: require("../app/assets/MruGame.webp"),
+    image: require("../assets/MruGame.webp"),
   },
 ];
 
@@ -31,25 +31,25 @@ const newlistings = [
     id: 1,
     title: "MRU open house is coming soon",
     description: "A beautiful view of the MRU Campus.....",
-    image: require("../app/assets/mruCampus.jpg"),
+    image: require("../assets//mruCampus.jpg"),
   },
   {
     id: 2,
     title: "New Club Events",
     description: "You are invited to attend.....",
-    image: require("../app/assets/mruClub.webp"),
+    image: require("../assets/mruClub.webp"),
   },
   {
     id: 3,
     title: "Basketball Game Tonight 🔥",
     description: "Don't forget to come .....",
-    image: require("../app/assets/MruGame.webp"),
+    image: require("../assets/MruGame.webp"),
   },
   {
     id: 4,
     title: "NEW CLUB EVENT",
     description: "Don't forget to come .....",
-    image: require("../app/assets/womenInBusiness.webp"),
+    image: require("../assets/womenInBusiness.webp"),
   },
 ];
 

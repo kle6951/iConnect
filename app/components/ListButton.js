@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, View, StyleSheet } from "react-native";
-import colors from "../app/config/colors";
+import colors from "../config/colors";
 import AppText from "./AppText";
 import { AntDesign } from "@expo/vector-icons";
 

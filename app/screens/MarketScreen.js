@@ -8,12 +8,12 @@ const marketListing = [
   {
     id: 1,
     groupName: "Textbook Market",
-    image: require("../app/assets/textbook.jpg"),
+    image: require("../assets/textbook.jpg"),
   },
   {
     id: 2,
     groupName: "Find My Housemate",
-    image: require("../app/assets/accomodation.jpg"),
+    image: require("../assets/accomodation.jpg"),
   },
 ];
 
