@@ -2,7 +2,7 @@ import React from "react";
 import Screen from "../components/Screen";
 import ListItem from "../components/ListItems/ListItem";
 import { StyleSheet, View, FlatList } from "react-native";
-import colors from "../app/config/colors";
+import colors from "../config/colors";
 import Icon from "../components/Icon";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import ListItemSeperator from "../components/ListItems/ListItemSeperator";
@@ -46,7 +46,7 @@ function AccountScreen() {
         <ListItem
           title="Josh Benjamin"
           description="josh123@mtroyal.ca"
-          image={require("../app/assets/studentProfile.jpeg")}
+          image={require("../assets/studentProfile.jpeg")}
         />
       </View>
       <View style={styles.container}>

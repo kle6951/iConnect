@@ -1,9 +1,9 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import colors from "../app/config/colors";
+import colors from "../config/colors";
 
-function GroupButton({onPress}) {
+function GroupButton({ onPress }) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
