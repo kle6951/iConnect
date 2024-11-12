@@ -34,10 +34,10 @@ function MarketScreen({ navigation }) {
   };
 
   // MarketScreen.js
-  const handleGroupPress = (groupName) => {
-    // Navigate to ListingItems with groupName as a parameter
-    navigation.navigate("ListingItems", { groupName });
-  };
+  // const handleGroupPress = (groupName) => {
+  //   // Navigate to ListingItems with groupName as a parameter
+  //   navigation.navigate("ListingItems", { groupName });
+  // };
 
   return (
     <Screen style={styles.container}>
@@ -71,7 +71,7 @@ function MarketScreen({ navigation }) {
           <GroupCard
             groupName={item.groupName}
             image={item.image}
-            onPress={() => handleGroupPress(item.groupName)}
+            onPress={() => navigation.navigate("ListingItems", item)}
           />
         )}
       />

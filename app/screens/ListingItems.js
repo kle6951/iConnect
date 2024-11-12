@@ -41,17 +41,16 @@ const newlistings = [
   },
 ];
 
-const ListingItems = () => {
+function ListingItems({ navigation }) {
   const [refreshing, setRefreshing] = useState(false);
   const [data, setData] = useState(listings);
 
   const handleRefresh = () => {
     setRefreshing(true);
-    // Simulating a network request
     setTimeout(() => {
-      setData(newlistings); // Update the listings to new listings
-      setRefreshing(false); // Stop the refreshing state
-    }, 2000); // Adjust the delay as needed
+      setData(newlistings);
+      setRefreshing(false);
+    }, 2000);
   };
 
   return (
@@ -64,7 +63,9 @@ const ListingItems = () => {
             title={item.title}
             description={item.description}
             image={item.image}
-            descriptionStyle={styles.descriptionStyle} // Add descriptionStyle here
+            descriptionStyle={styles.descriptionStyle}
+            onPress={() => navigation.navigate("ListingDetails", item)
+            } 
           />
         )}
         refreshing={refreshing}
@@ -72,7 +73,7 @@ const ListingItems = () => {
       />
     </Screen>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
