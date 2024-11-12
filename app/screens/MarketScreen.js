@@ -33,11 +33,13 @@ function MarketScreen({ navigation }) {
     }).start();
   };
 
-  // MarketScreen.js
-  // const handleGroupPress = (groupName) => {
-  //   // Navigate to ListingItems with groupName as a parameter
-  //   navigation.navigate("ListingItems", { groupName });
-  // };
+  const navigateToListing = (groupName) => {
+    if (groupName === "Textbook Market") {
+      navigation.navigate("ListingItems"); // Navigate to ListingItems
+    } else if (groupName === "Find My Housemate") {
+      navigation.navigate("ListingHousemate"); // Navigate to ListingHousemate
+    }
+  };
 
   return (
     <Screen style={styles.container}>
@@ -71,7 +73,7 @@ function MarketScreen({ navigation }) {
           <GroupCard
             groupName={item.groupName}
             image={item.image}
-            onPress={() => navigation.navigate("ListingItems", item)}
+            onPress={() => navigateToListing(item.groupName)} // Updated onPress
           />
         )}
       />
@@ -96,4 +98,5 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
 });
+
 export default MarketScreen;

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList, View } from "react-native";
 import Screen from "../components/Screen";
 import Card from "../components/cards/Card";
-import colors from "../config/colors"; // Make sure colors are imported
+import colors from "../config/colors"; // Ensure colors are imported
+import CreateButton from "../components/CreateButton";
 
 // Temporary data
 const listings = [
@@ -64,19 +65,24 @@ function ListingItems({ navigation }) {
             description={item.description}
             image={item.image}
             descriptionStyle={styles.descriptionStyle}
-            onPress={() => navigation.navigate("ListingDetails", item)
-            } 
+            onPress={() => navigation.navigate("ListingDetails", item)}
           />
         )}
         refreshing={refreshing}
         onRefresh={handleRefresh}
       />
+
+      {/* CreateButton fixed at the bottom */}
+      <View style={styles.createButtonContainer}>
+        <CreateButton onPress={() => navigation.navigate("ListingEdit")} />
+      </View>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1, // Ensures the container takes up full screen height
     padding: 10,
     backgroundColor: colors.screenWhite,
   },
@@ -84,6 +90,13 @@ const styles = StyleSheet.create({
     color: colors.primary,
     fontSize: 20,
     fontWeight: "bold",
+  },
+  // Adjusted the createButtonContainer to ensure it stays at the bottom of the screen
+  createButtonContainer: {
+    position: "absolute", // Absolute positioning for the button
+    bottom: 10, // Distance from the bottom of the screen
+    right: 10, // Distance from the right side of the screen
+    zIndex: 1, // Ensures the button is above other elements
   },
 });
 
