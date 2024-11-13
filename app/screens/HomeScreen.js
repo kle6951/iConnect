@@ -9,19 +9,19 @@ const listings = [
   {
     id: 1,
     title: "MRU open house is coming soon",
-    description: "A beautiful view of the MRU Campus.....",
+    price: "A beautiful view of the MRU Campus.....",
     image: require("../assets/mruCampus.jpg"),
   },
   {
     id: 2,
     title: "New Club Events",
-    description: "You are invited to attend.....",
+    price: "You are invited to attend.....",
     image: require("../assets//mruClub.webp"),
   },
   {
     id: 3,
     title: "Basketball Game Tonight 🔥",
-    description: "Don't forget to come .....",
+    price: "Don't forget to come .....",
     image: require("../assets/MruGame.webp"),
   },
 ];
@@ -30,25 +30,25 @@ const newlistings = [
   {
     id: 1,
     title: "MRU open house is coming soon",
-    description: "A beautiful view of the MRU Campus.....",
+    price: "A beautiful view of the MRU Campus.....",
     image: require("../assets//mruCampus.jpg"),
   },
   {
     id: 2,
     title: "New Club Events",
-    description: "You are invited to attend.....",
+    price: "You are invited to attend.....",
     image: require("../assets/mruClub.webp"),
   },
   {
     id: 3,
     title: "Basketball Game Tonight 🔥",
-    description: "Don't forget to come .....",
+    price: "Don't forget to come .....",
     image: require("../assets/MruGame.webp"),
   },
   {
     id: 4,
     title: "NEW CLUB EVENT",
-    description: "Don't forget to come .....",
+    price: "Don't forget to come .....",
     image: require("../assets/womenInBusiness.webp"),
   },
 ];
@@ -74,7 +74,7 @@ const HomeScreen = () => {
         renderItem={({ item }) => (
           <Card
             title={item.title}
-            description={item.description}
+            price={item.price}
             image={item.image}
           />
         )}

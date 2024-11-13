@@ -10,13 +10,13 @@ const listings = [
   {
     id: 1,
     title: "Nursing/ Accounting/ Japanese/ Textbooks for sale",
-    description: "$10",
+    price: "$10",
     image: require("../assets/textbook_02.jpg"),
   },
   {
     id: 2,
     title: "Economic Textbooks",
-    description: "$5",
+    price: "$5",
     image: require("../assets/oldTextbook.jpg"),
   },
 ];
@@ -25,19 +25,19 @@ const newlistings = [
   {
     id: 1,
     title: "Nursing/ Accounting/ Japanese/ Textbooks for sale",
-    description: "$10",
+    price: "$10",
     image: require("../assets/textbook_02.jpg"),
   },
   {
     id: 2,
     title: "Economic Textbooks",
-    description: "$5",
+    price: "$5",
     image: require("../assets/oldTextbook.jpg"),
   },
   {
     id: 3,
     title: "Finance Textbooks",
-    description: "FREE",
+    price: "FREE",
     image: require("../assets/financeBooks.jpg"),
   },
 ];
@@ -62,9 +62,9 @@ function ListingItems({ navigation }) {
         renderItem={({ item }) => (
           <Card
             title={item.title}
-            description={item.description}
+            price={item.price}
             image={item.image}
-            descriptionStyle={styles.descriptionStyle}
+            priceStyle={styles.priceStyle}
             onPress={() => navigation.navigate("ListingDetails", item)}
           />
         )}
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: colors.screenWhite,
   },
-  descriptionStyle: {
+  priceStyle: {
     color: colors.primary,
     fontSize: 20,
     fontWeight: "bold",

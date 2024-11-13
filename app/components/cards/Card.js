@@ -8,7 +8,7 @@ import {
 import colors from "../../config/colors";
 import AppText from "../AppText";
 
-function Card({ title, description, image, descriptionStyle, onPress }) {
+function Card({ title, price, image, priceStyle, onPress }) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.card}>
@@ -18,10 +18,9 @@ function Card({ title, description, image, descriptionStyle, onPress }) {
             {title}
           </AppText>
           <AppText
-            style={[styles.description, descriptionStyle]}
-            numberOfLines={5}
+            style={[styles.price, priceStyle]}
           >
-            {description}
+            {price}
           </AppText>
         </View>
       </View>
@@ -36,7 +35,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     overflow: "hidden",
   },
-  description: {},
   detailedContainer: {
     // will implement later for long description holder
   },
