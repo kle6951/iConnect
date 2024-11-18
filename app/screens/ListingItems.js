@@ -1,78 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList, View } from "react-native";
 import Screen from "../components/Screen";
 import Card from "../components/cards/Card";
-import colors from "../config/colors"; // Ensure colors are imported
+import colors from "../config/colors";
 import CreateButton from "../components/CreateButton";
-
-// Temporary data
-const listings = [
-  {
-    id: 1,
-    title: "Nursing/ Accounting/ Japanese/ Textbooks for sale",
-    price: "$10",
-    image: require("../assets/textbook_02.jpg"),
-  },
-  {
-    id: 2,
-    title: "Economic Textbooks",
-    price: "$5",
-    image: require("../assets/oldTextbook.jpg"),
-  },
-];
-
-const newlistings = [
-  {
-    id: 1,
-    title: "Nursing/ Accounting/ Japanese/ Textbooks for sale",
-    price: "$10",
-    image: require("../assets/textbook_02.jpg"),
-  },
-  {
-    id: 2,
-    title: "Economic Textbooks",
-    price: "$5",
-    image: require("../assets/oldTextbook.jpg"),
-  },
-  {
-    id: 3,
-    title: "Finance Textbooks",
-    price: "FREE",
-    image: require("../assets/financeBooks.jpg"),
-  },
-];
+import listingApi from "../components/api/listings";
+import AppText from "../components/AppText";
+import Button from "../components/AppButton";
+import ActivityIndicator from "../components/ActivityIndicator";
+import useApi from "../hooks/useApi";
 
 function ListingItems({ navigation }) {
-  const [refreshing, setRefreshing] = useState(false);
-  const [data, setData] = useState(listings);
-
-  const handleRefresh = () => {
-    setRefreshing(true);
-    setTimeout(() => {
-      setData(newlistings);
-      setRefreshing(false);
-    }, 2000);
-  };
-
+  const getListingAPI = useApi(listingApi.getListings);
+  useEffect(() => {
+    getListingAPI.request(1, 2, 3);
+  }, []);
   return (
     <Screen style={styles.container}>
+      {getListingAPI.error && (
+        <>
+          <AppText>Couldn't retrieve the listings</AppText>
+          <Button title="Retry" onPress={getListingAPI.request(1, 2, 3)} />
+        </>
+      )}
+      {/* Loading animation*/}
+      <ActivityIndicator visible={getListingAPI.loading} />
       <FlatList
-        data={data}
+        data={getListingAPI.data}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <Card
-            title={item.title}
-            price={item.price}
-            image={item.image}
-            priceStyle={styles.priceStyle}
-            onPress={() => navigation.navigate("ListingDetails", item)}
-          />
-        )}
-        refreshing={refreshing}
-        onRefresh={handleRefresh}
-      />
+        renderItem={({ item }) => {
+          const images = JSON.parse(item.images); // Parse the images JSON string into an array
+          const imageURL = images[0]?.url; // Access the URL of the first image
 
-      {/* CreateButton fixed at the bottom */}
+          return (
+            <Card
+              title={item.title}
+              price={"$" + item.price}
+              imageURL={imageURL}
+              priceStyle={styles.priceStyle}
+              onPress={() => navigation.navigate("ListingDetails", item)}
+            />
+          );
+        }}
+      />
       <View style={styles.createButtonContainer}>
         <CreateButton onPress={() => navigation.navigate("ListingEdit")} />
       </View>
@@ -82,7 +52,7 @@ function ListingItems({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Ensures the container takes up full screen height
+    flex: 1,
     padding: 10,
     backgroundColor: colors.screenWhite,
   },
@@ -93,10 +63,10 @@ const styles = StyleSheet.create({
   },
   // Adjusted the createButtonContainer to ensure it stays at the bottom of the screen
   createButtonContainer: {
-    position: "absolute", // Absolute positioning for the button
-    bottom: 10, // Distance from the bottom of the screen
-    right: 10, // Distance from the right side of the screen
-    zIndex: 1, // Ensures the button is above other elements
+    position: "absolute",
+    bottom: 10,
+    right: 10,
+    zIndex: 1,
   },
 });
 
