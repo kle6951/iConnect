@@ -7,9 +7,9 @@ import WelcomeScreen from "./app/screens/WelcomeScreen";
 // Main App component
 export default function App() {
   return (
-    // <NavigationContainer theme={NavigationTheme}>
-    //   <AppNavigator />
-    // </NavigationContainer>
-    <WelcomeScreen/>
+    <NavigationContainer theme={NavigationTheme}>
+      <AppNavigator />
+    </NavigationContainer>
+    // <WelcomeScreen/>
   );
 }

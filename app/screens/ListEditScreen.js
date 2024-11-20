@@ -65,6 +65,23 @@ const categories = [
 ];
 function ListEditScreen() {
   const location = useLocation();
+  const handleSubmit = async (listing, { resetForm }) => {
+    // setProgress(0);
+    // setUploadVisible(true);
+    console.log("Form submitted", listing); // Debug
+
+    const result = await listingsApi.addListing(
+      { ...listing, location }
+      // (progress) => setProgress(progress)
+    );
+
+    if (!result.ok) {
+      // setUploadVisible(false);
+      return alert("Could not save the listing");
+    }
+
+    resetForm();
+  };
   return (
     <Screen>
       <AppForm
@@ -75,7 +92,7 @@ function ListEditScreen() {
           categories: null,
           images: [],
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <FormImagePicker name="images" />

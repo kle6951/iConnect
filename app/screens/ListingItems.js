@@ -4,7 +4,7 @@ import Screen from "../components/Screen";
 import Card from "../components/cards/Card";
 import colors from "../config/colors";
 import CreateButton from "../components/CreateButton";
-import listingApi from "../components/api/listings";
+import listingApi from "../api/listings";
 import AppText from "../components/AppText";
 import Button from "../components/AppButton";
 import ActivityIndicator from "../components/ActivityIndicator";
