@@ -65,7 +65,7 @@ const categories = [
     IconComponentName: FontAwesome6,
   },
 ];
-function ListEditScreen() {
+function ListEditScreen({ navigation }) {
   const location = useLocation();
   const [uploadVisible, setUploadVisible] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -81,6 +81,7 @@ function ListEditScreen() {
       return alert("Could not save the listing");
     }
     resetForm();
+    navigation.goBack(); // Close the modal after successful upload
   };
   return (
     <Screen>

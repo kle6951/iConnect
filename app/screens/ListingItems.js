@@ -23,7 +23,6 @@ function ListingItems({ navigation }) {
           <Button title="Retry" onPress={getListingAPI.request(1, 2, 3)} />
         </>
       )}
-      {/* Loading animation*/}
       <ActivityIndicator visible={getListingAPI.loading} />
       <FlatList
         data={getListingAPI.data}
