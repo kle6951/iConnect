@@ -1,85 +1,84 @@
 import React, { useState } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import colors from "../config/colors";
-import Card from "../components/cards/Card";
 import Screen from "../components/Screen";
+import Post from "../components/Post/Post";
+import PostBox from "../components/Post/PostBox";
 
-// Waiting for backend API. This is temporary data
-const listings = [
+const samplePost = [
   {
-    id: 1,
-    title: "MRU open house is coming soon",
-    price: "A beautiful view of the MRU Campus.....",
-    image: require("../assets/mruCampus.jpg"),
-  },
-  {
-    id: 2,
-    title: "New Club Events",
-    price: "You are invited to attend.....",
-    image: require("../assets//mruClub.webp"),
-  },
-  {
-    id: 3,
-    title: "Basketball Game Tonight 🔥",
-    price: "Don't forget to come .....",
-    image: require("../assets/MruGame.webp"),
-  },
-];
+    user: {
+      name: "John Smith",
+      avatar: require("../assets/studentProfile.jpeg"),
+    },
+    caption: `University Basketball Showdown 2024
 
-const newlistings = [
-  {
-    id: 1,
-    title: "MRU open house is coming soon",
-    price: "A beautiful view of the MRU Campus.....",
-    image: require("../assets//mruCampus.jpg"),
+🏀 Get Ready to Cheer for Your Team! 🏀
+Join us for an electrifying basketball event where campus pride meets thrilling competition.
+
+📅 Date: [Insert date]
+⏰ Time: [Insert time]
+📍 Venue: [Insert venue]
+
+🔥 Highlights:
+- High-energy games featuring [Team A vs. Team B/University teams].
+- Half-time show with live performances.
+- Food trucks and giveaways for fans.
+
+🎟️ Admission: [Free/Ticket info here]
+📢 Don’t miss out on the slam dunks, buzzer-beaters, and unforgettable moments!
+
+📲 Stay updated: [Insert social media or event page link]
+
+Let’s pack the stands and make it a night to remember!`,
+    photos: [
+      require("../assets/MruGame.webp"),
+      require("../assets/mruCampus.jpg"),
+      require("../assets/basketballGame.webp"),
+    ],
   },
   {
-    id: 2,
-    title: "New Club Events",
-    price: "You are invited to attend.....",
-    image: require("../assets/mruClub.webp"),
-  },
-  {
-    id: 3,
-    title: "Basketball Game Tonight 🔥",
-    price: "Don't forget to come .....",
-    image: require("../assets/MruGame.webp"),
-  },
-  {
-    id: 4,
-    title: "NEW CLUB EVENT",
-    price: "Don't forget to come .....",
-    image: require("../assets/womenInBusiness.webp"),
+    user: {
+      name: "David Jones",
+      avatar: require("../assets/studentProfile_02.jpg"),
+    },
+    caption: `Amazing Campus Event 2024
+
+🎉 Come celebrate with us as we mark another fantastic year of success!
+
+📅 Date: [Insert date]
+⏰ Time: [Insert time]
+📍 Venue: [Insert venue]
+
+🔥 Highlights:
+- Fun activities for everyone.
+- Guest speakers from different fields.
+- Free food and drinks for all.
+
+🎟️ Admission: [Free/Ticket info here]
+📢 You won't want to miss this event!
+
+📲 Follow us on [Insert social media link] for updates.`,
+    photos: [],
   },
 ];
 
 const HomeScreen = () => {
-  const [refreshing, setRefreshing] = useState(false);
-  const [data, setData] = useState(listings);
+  const [posts, setPosts] = useState(samplePost);
 
-  const handleRefresh = () => {
-    setRefreshing(true);
-    // Simulating a network request
-    setTimeout(() => {
-      setData(newlistings); // Update the listings to new listings
-      setRefreshing(false); // Stop the refreshing state
-    }, 2000); // You can adjust the delay as needed
+  const addPost = (newPost) => {
+    setPosts([newPost, ...posts]);
   };
 
   return (
     <Screen style={styles.container}>
+      <PostBox onPostSubmit={addPost} />
       <FlatList
-        data={data} // Use the state variable for data
-        keyExtractor={(item) => item.id.toString()} // Use item.id
+        data={posts}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <Card
-            title={item.title}
-            price={item.price}
-            image={item.image}
-          />
+          <Post user={item.user} caption={item.caption} photos={item.photos} />
         )}
-        refreshing={refreshing} // Controlled refreshing state
-        onRefresh={handleRefresh} // Attach the refresh handler
       />
     </Screen>
   );

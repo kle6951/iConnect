@@ -9,32 +9,9 @@ import ListItemSeperator from "../components/ListItems/ListItemSeperator";
 
 const menuItems = [
   {
-    title: "Setting",
-    icon: {
-      ComponentName: AntDesign,
-      name: "setting",
-      backgroundColor: colors.primary,
-    },
-  },
-  {
     title: "My Listings",
     icon: {
       name: "format-list-bulleted",
-      backgroundColor: colors.primary,
-    },
-  },
-  {
-    title: "Saved",
-    icon: {
-      name: "archive",
-      backgroundColor: colors.primary,
-    },
-  },
-  {
-    title: "Support",
-    icon: {
-      ComponentName: MaterialIcons,
-      name: "support-agent",
       backgroundColor: colors.primary,
     },
   },

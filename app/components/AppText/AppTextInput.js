@@ -5,7 +5,6 @@ import colors from "../../config/colors";
 import defaultStyles from "../../config/styles";
 
 function AppTextInput({ icon, width = "100%", ...otherProps }) {
-  // icon is optional therefore icon & __
   return (
     <View style={[styles.container, { width }]}>
       {icon && (
