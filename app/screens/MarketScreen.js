@@ -37,7 +37,7 @@ function MarketScreen({ navigation }) {
     if (groupName === "Textbook Market") {
       navigation.navigate("ListingItems"); // Navigate to ListingItems
     } else if (groupName === "Find My Housemate") {
-      navigation.navigate("ListingHousemate"); // Navigate to ListingHousemate
+      navigation.navigate("ListingRoomate"); // Navigate to ListingRoomate
     }
   };
 

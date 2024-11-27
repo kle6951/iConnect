@@ -1,17 +1,17 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, FlatList, View } from "react-native";
 import Screen from "../components/Screen";
 import Card from "../components/cards/Card";
 import colors from "../config/colors";
 import CreateButton from "../components/CreateButton";
-import listingApi from "../api/listings";
+import roomateListingsApi from "../api/roomateListings";
 import AppText from "../components/AppText";
 import Button from "../components/AppButton";
 import ActivityIndicator from "../components/ActivityIndicator";
 import useApi from "../hooks/useApi";
 
-function ListingItems({ navigation }) {
-  const getListingAPI = useApi(listingApi.getListings);
+function ListRoomate({ navigation }) {
+  const getListingAPI = useApi(roomateListingsApi.getListings);
   useEffect(() => {
     getListingAPI.request(1, 2, 3);
   }, []);
@@ -44,7 +44,7 @@ function ListingItems({ navigation }) {
         }}
       />
       <View style={styles.createButtonContainer}>
-        <CreateButton onPress={() => navigation.navigate("ListingEdit")} />
+        <CreateButton onPress={() => navigation.navigate("RoomateEdit")} />
       </View>
     </Screen>
   );
@@ -70,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListingItems;
+export default ListRoomate;

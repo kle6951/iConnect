@@ -1,0 +1,96 @@
+import client from "./cilent";
+import { storage } from "./firebaseConfig";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+
+const endPoint = "/roomateListings";
+
+// upload Images to Firebase
+const uploadToFirebase = async (imageUri, setProgress) => {
+  try {
+    const response = await fetch(imageUri);
+    const blob = await response.blob();
+
+    const filename = `roomateListings/${Date.now()}_${imageUri
+      .split("/")
+      .pop()}`;
+    const imageRef = ref(storage, filename);
+
+    const uploadTask = uploadBytesResumable(imageRef, blob);
+
+    // Listen for state changes and update progress
+    await new Promise((resolve, reject) => {
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          // console.log(`Upload is ${progress}% done`);
+          if (setProgress) setProgress(progress); // Update progress in the parent component
+        },
+        (error) => {
+          console.error("Upload failed:", error.message);
+          reject(error);
+        },
+        () => {
+          resolve();
+        }
+      );
+    });
+
+    const downloadURL = await getDownloadURL(imageRef);
+    return downloadURL;
+  } catch (error) {
+    throw new Error("Failed to upload image to Firebase Storage.");
+  }
+};
+
+// GET command
+const getListings = () => client.get(endPoint);
+// POST command
+const addListings = async (listing, onUploadProgress) => {
+  const data = new FormData();
+  data.append("title", listing.title);
+  data.append("price", listing.price);
+  data.append("description", listing.description);
+  data.append("category_id", listing.category.value);
+
+  const imageUrls = [];
+
+  try {
+    for (const imageUri of listing.images) {
+      try {
+        const firebaseUrl = await uploadToFirebase(imageUri, onUploadProgress);
+        const imageName = imageUri.split("/").pop(); // Extracting image name
+        imageUrls.push({ url: firebaseUrl, name: imageName }); // Storing url and name
+      } catch (error) {
+        console.error("Error uploading image:", error.message);
+        alert("Failed to upload one or more images. Please try again.");
+        return { ok: false }; // Stop if any image upload fails
+      }
+    }
+
+    // Store images as JSON with "url" and "name"
+    data.append("images", JSON.stringify(imageUrls));
+
+    if (listing.location) {
+      data.append("location", JSON.stringify(listing.location));
+    }
+
+    // console.log("Preparing to upload listing to endpoint...");
+    const response = await client.post(endPoint, data, {
+      onUploadProgress: (progress) =>
+        onUploadProgress(progress.loaded / progress.total),
+    });
+    // console.log("Listing upload completed:", response);
+    return response;
+  } catch (error) {
+    console.error("Error posting listing:", error.message);
+    alert("Failed to save the listing. Please try again later.");
+    return { ok: false };
+  }
+};
+
+export default {
+  addListings,
+  getListings,
+};

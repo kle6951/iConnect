@@ -3,8 +3,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import MarketScreen from "../screens/MarketScreen";
 import ListingItems from "../screens/ListingItems";
 import ListingDetailScreen from "../screens/ListingDetailScreen";
-import ListHousemate from "../screens/ListHousemate";
+import ListRoomate from "../screens/ListRoomate";
 import ListEditScreen from "../screens/ListEditScreen";
+import RoomateEditScreen from "../screens/RoomateEditScreen";
 
 const Stack = createStackNavigator();
 
@@ -26,10 +27,19 @@ const GroupNavigator = () => {
         component={ListingDetailScreen}
         options={{ presentation: "modal", headerShown: false }}
       />
-      <Stack.Screen name="ListingHousemate" component={ListHousemate} />
+      <Stack.Screen
+        name="ListingRoomate"
+        component={ListRoomate}
+        options={{ headerTitle: "" }}
+      />
       <Stack.Screen
         name="ListingEdit"
         component={ListEditScreen}
+        options={{ presentation: "modal", headerShown: false }}
+      />
+      <Stack.Screen
+        name="RoomateEdit"
+        component={RoomateEditScreen}
         options={{ presentation: "modal", headerShown: false }}
       />
     </Stack.Navigator>
