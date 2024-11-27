@@ -6,6 +6,7 @@ import ListingDetailScreen from "../screens/ListingDetailScreen";
 import ListRoomate from "../screens/ListRoomate";
 import ListEditScreen from "../screens/ListEditScreen";
 import RoomateEditScreen from "../screens/RoomateEditScreen";
+import GroupScreen from "../screens/GroupScreen";
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,11 @@ const GroupNavigator = () => {
         name="Market"
         component={MarketScreen}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="GroupListings"
+        component={GroupScreen}
+        options={{ headerTitle: "" }}
       />
       <Stack.Screen
         name="ListingItems"
