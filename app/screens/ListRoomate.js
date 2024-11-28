@@ -20,7 +20,10 @@ function ListRoomate({ navigation }) {
       {getListingAPI.error && (
         <>
           <AppText>Couldn't retrieve the listings</AppText>
-          <Button title="Retry" onPress={getListingAPI.request(1, 2, 3)} />
+          <Button
+            title="Retry"
+            onPress={() => getListingAPI.request(1, 2, 3)}
+          />
         </>
       )}
       {/* Loading animation*/}

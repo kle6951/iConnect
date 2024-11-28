@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, FlatList, View } from "react-native";
 import Screen from "../components/Screen";
 import Card from "../components/cards/Card";
@@ -20,7 +20,10 @@ function ListingItems({ navigation }) {
       {getListingAPI.error && (
         <>
           <AppText>Couldn't retrieve the listings</AppText>
-          <Button title="Retry" onPress={getListingAPI.request(1, 2, 3)} />
+          <Button
+            title="Retry"
+            onPress={() => getListingAPI.request(1, 2, 3)}
+          />
         </>
       )}
       <ActivityIndicator visible={getListingAPI.loading} />
