@@ -7,41 +7,41 @@ const groupListing = [
   {
     id: 1,
     groupName: "Mount Royal Skiing Club",
-    image: require("../assets/SkiClub.jpg"),
+    image: require("../assets/images/SkiClub.jpg"),
   },
   {
     id: 2,
     groupName: "International Student Club",
-    image: require("../assets/internationalClub.jpg"),
+    image: require("../assets/images/internationalClub.jpg"),
   },
   {
     id: 3,
     groupName: "MRU Gaming Club",
-    image: require("../assets/gamingClub.webp"),
+    image: require("../assets/images/gamingClub.webp"),
   },
   {
     id: 4,
     groupName: "Computing Alliance of Mount Royal University",
-    image: require("../assets/computingAlliance.png"),
+    image: require("../assets/images/computingAlliance.png"),
   },
   {
     id: 5,
     groupName: "Women In Business",
-    image: require("../assets/womenInBusiness.webp"),
+    image: require("../assets/images/womenInBusiness.webp"),
   },
   {
     id: 6,
     groupName: "Society of Broadcasting",
-    image: require("../assets/broadcastingSociety.jpg"),
+    image: require("../assets/images/broadcastingSociety.jpg"),
   },
   {
     id: 7,
     groupName: "MRU Smash",
-    image: require("../assets/smashClub.jpeg"),
+    image: require("../assets/images/smashClub.jpeg"),
   },
 ];
 
-function GroupScreen(props) {
+function GroupScreen() {
   return (
     <Screen style={styles.container}>
       <FlatList

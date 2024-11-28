@@ -10,7 +10,7 @@ const PostBox = ({ onPostSubmit }) => {
       const newPost = {
         user: {
           name: "Your Name", 
-          avatar: require("../../assets/studentProfile.jpeg"), 
+          avatar: require("../../assets/images/studentProfile.jpeg"), 
         },
         caption: postText,
         photos: [],  

@@ -16,7 +16,7 @@ function ListingDetailScreen({ route }) {
         <AppText style={styles.description}>{listing.description}</AppText>
         <View style={styles.userContainer}>
           <ListItem
-            image={require("../assets/studentProfile.jpeg")}
+            image={require("../assets/images/studentProfile.jpeg")}
             title={"Josh Benjamin"}
             description={"5 Listings"}
           />

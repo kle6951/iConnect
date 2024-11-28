@@ -9,7 +9,7 @@ const samplePost = [
   {
     user: {
       name: "John Smith",
-      avatar: require("../assets/studentProfile.jpeg"),
+      avatar: require("../assets/images/studentProfile.jpeg"),
     },
     caption: `University Basketball Showdown 2024
 
@@ -32,15 +32,15 @@ Join us for an electrifying basketball event where campus pride meets thrilling 
 
 Let’s pack the stands and make it a night to remember!`,
     photos: [
-      require("../assets/MruGame.webp"),
-      require("../assets/mruCampus.jpg"),
-      require("../assets/basketballGame.webp"),
+      require("../assets/images/MruGame.webp"),
+      require("../assets/images/mruCampus.jpg"),
+      require("../assets/images/basketballGame.webp"),
     ],
   },
   {
     user: {
       name: "David Jones",
-      avatar: require("../assets/studentProfile_02.jpg"),
+      avatar: require("../assets/images/studentProfile_02.jpg"),
     },
     caption: `Amazing Campus Event 2024
 

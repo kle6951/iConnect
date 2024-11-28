@@ -23,7 +23,7 @@ function AccountScreen() {
         <ListItem
           title="Josh Benjamin"
           description="josh123@mtroyal.ca"
-          image={require("../assets/studentProfile.jpeg")}
+          image={require("../assets/images/studentProfile.jpeg")}
         />
       </View>
       <View style={styles.container}>
