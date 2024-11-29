@@ -5,9 +5,9 @@ import AppButton from "../components/AppButton";
 
 function WelcomeScreen({navigation}) {
   return (
-    <ImageBackground style={styles.container} source={require('../assets/Background.png')}>
+    <ImageBackground style={styles.container} source={require('../assets/images/Background.png')}>
       <View style={styles.logoContainer}>
-        <Image style={styles.logo} source={require("../assets/Logo.png")} />
+        <Image style={styles.logo} source={require("../assets/images/Logo.png")} />
         <Text style={styles.slogan}>We are connected!</Text>
       </View>
       <View style={styles.buttonsContainer}>

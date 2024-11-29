@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Screen from "../components/Screen";
 import * as Yup from "yup";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Alert } from "react-native";
 import { AppForm, AppFormField, SubmitButton } from "../components/forms";
+import authApi from "../api/auth";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
@@ -19,11 +20,32 @@ const validationSchema = Yup.object().shape({
 });
 
 function RegisterScreen() {
+  const [loading, setLoading] = useState(false);
+
+  const handleRegister = async (values) => {
+    setLoading(true);
+    const { name, email, password } = values;
+
+    const response = await authApi.register(name, email, password);
+
+    setLoading(false);
+
+    if (response.ok) {
+      // Successful registration
+      Alert.alert(
+        "Registration Successful",
+        "You have been registered successfully!"
+      );
+    } else {
+      // Error handling
+      Alert.alert("Registration Error", response.error);
+    }
+  };
   return (
     <Screen style={styles.container}>
       <AppForm
         initialValues={{ name: "", email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={handleRegister}
         validationSchema={validationSchema}
       >
         <AppFormField
@@ -54,7 +76,10 @@ function RegisterScreen() {
           secureTextEntry
           textContentType="password"
         />
-        <SubmitButton title="Register" />
+        <SubmitButton
+          title={loading ? "Registering..." : "Register"}
+          disabled={loading}
+        />
       </AppForm>
     </Screen>
   );

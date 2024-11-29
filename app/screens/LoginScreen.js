@@ -18,7 +18,7 @@ function LoginScreen() {
     <Screen style={styles.container}>
       <Image
         style={styles.logo}
-        source={require("../assets/Logo.png")}
+        source={require("../assets/images/Logo.png")}
       />
       <AppForm
         initialValues={{ email: "", password: "" }}
