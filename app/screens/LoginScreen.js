@@ -1,8 +1,9 @@
-import React from "react";
-import { StyleSheet, Image } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Image, Alert } from "react-native";
 import Screen from "../components/Screen";
 import * as Yup from "yup";
 import { AppFormField, SubmitButton, AppForm } from "../components/forms";
+import authApi from "../api/auth";
 
 /* Use Formik to reduce code the complexity when handling multiple text input
 so we can remove useState */
@@ -14,6 +15,28 @@ const validationSchema = Yup.object().shape({
 });
 
 function LoginScreen() {
+  const [loginFailed, setLoginFailed] = useState(false);
+  const handleLogin = async (userInfo) => {
+    const { email, password } = userInfo;
+    try {
+      const response = await authApi.login(email, password);
+      if (!response.ok) {
+        setLoginFailed(true);
+        Alert.alert(
+          "Login Failed",
+          response.error || "Invalid email or password"
+        );
+        return;
+      }
+      // Will navigate here
+      setLoginFailed(false);
+      Alert.alert("Login Successful", "Welcome back!");
+      console.log("Login Successful:", response.data);
+    } catch (error) {
+      console.error("Login error:", error);
+      Alert.alert("An unexpected error occurred.");
+    }
+  };
   return (
     <Screen style={styles.container}>
       <Image
@@ -22,7 +45,7 @@ function LoginScreen() {
       />
       <AppForm
         initialValues={{ email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={handleLogin}
         validationSchema={validationSchema}
       >
         <AppFormField

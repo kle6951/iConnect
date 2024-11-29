@@ -1,6 +1,9 @@
 import client from "./client";
 import { auth } from "../api/firebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const endpoint = "/users";
 
@@ -33,7 +36,31 @@ const register = async (fullName, email, password) => {
     return { ok: false, error: error.message };
   }
 };
+const login = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const firebaseUser = userCredential.user;
+
+    const response = await client.get(`${endpoint}/${firebaseUser.uid}`);
+
+    if (response.ok) {
+      console.log("Login Successful");
+      return { ok: true, data: response.data };
+    } else {
+      console.error("User not found in database");
+      return { ok: false, error: "User not found in the database" };
+    }
+  } catch (error) {
+    console.error("Login Error:", error.message);
+    return { ok: false, error: error.message };
+  }
+};
 
 export default {
   register,
+  login,
 };
