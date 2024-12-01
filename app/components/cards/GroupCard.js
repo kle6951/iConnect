@@ -21,9 +21,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.primary,
     height: 100,
-    borderRadius: 25,
-    marginBottom: 10,
-    overflow: "hidden", // Ensures rounded corners for the image and the container
   },
   groupName: {
     fontWeight: "bold",

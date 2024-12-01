@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import MarketScreen from "../screens/MarketScreen";
+import ActivityScreen from "../screens/ActivityScreen";
 import ListingItems from "../screens/ListingItems";
 import ListingDetailScreen from "../screens/ListingDetailScreen";
 import ListRoomate from "../screens/ListRoomate";
@@ -12,10 +12,10 @@ const Stack = createStackNavigator();
 
 const GroupNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="Market">
+    <Stack.Navigator initialRouteName="Activity">
       <Stack.Screen
-        name="Market"
-        component={MarketScreen}
+        name="Activity"
+        component={ActivityScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
