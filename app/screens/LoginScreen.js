@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { AppFormField, SubmitButton, AppForm } from "../components/forms";
 import authApi from "../api/auth";
 import AuthContext from "../auth/context";
+import authUser from "../auth/storage";
 
 /* Use Formik to reduce code the complexity when handling multiple text input
 so we can remove useState */
@@ -33,6 +34,7 @@ function LoginScreen() {
       // Will navigate here
       setLoginFailed(false);
       authContext.setUser(response.data);
+      authUser.storeUser(response.data);
       Alert.alert("Login Successful", "Welcome back!");
       console.log("Login Successful:", response.data);
     } catch (error) {
