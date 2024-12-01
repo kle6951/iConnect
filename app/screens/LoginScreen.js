@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, Image, Alert } from "react-native";
 import Screen from "../components/Screen";
 import * as Yup from "yup";
 import { AppFormField, SubmitButton, AppForm } from "../components/forms";
 import authApi from "../api/auth";
+import AuthContext from "../auth/context";
 
 /* Use Formik to reduce code the complexity when handling multiple text input
 so we can remove useState */
@@ -15,6 +16,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function LoginScreen() {
+  const authContext = useContext(AuthContext);
   const [loginFailed, setLoginFailed] = useState(false);
   const handleLogin = async (userInfo) => {
     const { email, password } = userInfo;
@@ -30,6 +32,7 @@ function LoginScreen() {
       }
       // Will navigate here
       setLoginFailed(false);
+      authContext.setUser(response.data);
       Alert.alert("Login Successful", "Welcome back!");
       console.log("Login Successful:", response.data);
     } catch (error) {
