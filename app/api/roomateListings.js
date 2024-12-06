@@ -1,4 +1,4 @@
-import client from "./cilent";
+import client from "./client";
 import { storage } from "./firebaseConfig";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 

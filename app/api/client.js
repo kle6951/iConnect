@@ -1,7 +1,7 @@
 import { create } from "apisauce";
 import cache from "../utility/cache";
 const apiCilent = create({
-  baseURL: "http:/34.28.178.157:8080/api",
+  baseURL: "http://34.46.202.148:8080/api",
   timeout: 30000, // 30 seconds
 });
 const get = apiCilent.get;
@@ -12,7 +12,7 @@ const generateKey = (url, params) => {
 
 apiCilent.get = async (url, params, axiosConfig) => {
   const cacheKey = generateKey(url, params);
-  const response = await get(url, params, axiosConfig);
+  const response = await get(url, params, axiosConfig); // Await the response
 
   if (response.ok) {
     cache.store(cacheKey, response.data);
