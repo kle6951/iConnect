@@ -61,6 +61,30 @@ Let’s pack the stands and make it a night to remember!`,
 📲 Follow us on [Insert social media link] for updates.`,
     photos: [],
   },
+  {
+    user: {
+      name: "Emily Davis",
+      avatar: require("../assets/images/studentProfile_02.jpg"),
+    },
+    caption: `Tech Conference 2024
+
+🚀 Join us at the most anticipated tech conference of the year, where industry leaders and innovators come together to showcase the latest in technology.
+
+📅 Date: [Insert date]
+⏰ Time: [Insert time]
+📍 Venue: [Insert venue]
+
+🔥 Highlights:
+- Keynote speeches from renowned tech entrepreneurs.
+- Workshops and hands-on sessions on AI, blockchain, and more.
+- Networking opportunities with top companies.
+
+🎟️ Admission: [Free/Ticket info here]
+📢 Don’t miss the chance to be part of the future of tech!
+
+📲 Follow us for updates and more information.`,
+    photos: [],
+  },
 ];
 
 const HomeScreen = () => {
@@ -79,6 +103,7 @@ const HomeScreen = () => {
         renderItem={({ item }) => (
           <Post user={item.user} caption={item.caption} photos={item.photos} />
         )}
+        contentContainerStyle={styles.flatListContent}
       />
     </Screen>
   );
@@ -86,8 +111,12 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1, 
     padding: 10,
     backgroundColor: colors.screenWhite,
+  },
+  flatListContent: {
+    paddingBottom: 20, 
   },
 });
 

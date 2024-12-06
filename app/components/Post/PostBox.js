@@ -9,14 +9,14 @@ const PostBox = ({ onPostSubmit }) => {
     if (postText.trim()) {
       const newPost = {
         user: {
-          name: "Your Name", 
-          avatar: require("../../assets/images/studentProfile.jpeg"), 
+          name: "Your Name",
+          avatar: require("../../assets/images/studentProfile.jpeg"),
         },
         caption: postText,
-        photos: [],  
+        photos: [],
       };
-      onPostSubmit(newPost);  // Pass new post back to the parent
-      setPostText("");  // Reset input after submission
+      onPostSubmit(newPost); // Pass new post back to the parent
+      setPostText(""); // Reset input after submission
     } else {
       alert("Please write something before posting!");
     }
@@ -26,7 +26,7 @@ const PostBox = ({ onPostSubmit }) => {
     <View style={styles.container}>
       <TextInput
         style={styles.textInput}
-        placeholder="Share your exiciting news"
+        placeholder="Share your exciting news"
         value={postText}
         onChangeText={setPostText}
         multiline
