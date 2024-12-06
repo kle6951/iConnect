@@ -1,18 +1,28 @@
 import React from "react";
-import { View, Image, StyleSheet } from "react-native";
+import { View, ScrollView, Image, StyleSheet } from "react-native";
 import AppText from "../components/AppText";
 import colors from "../config/colors";
 import ListItem from "../components/ListItems/ListItem";
 import PostCaption from "../components/Post/PostCaption";
+import CloseIcon from "../components/Post/CloseIcon";
 
-function ListingDetailScreen({ route }) {
+function ListingDetailScreen({ route, navigation }) {
   const { item } = route.params;
   const images = JSON.parse(item.images);
   const imageURL = images[0]?.url;
 
+  const handleClose = () => {
+    navigation.goBack();
+  };
+
   return (
-    <View>
-      <Image style={styles.image} source={{ uri: imageURL }} />
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <View style={styles.imageContainer}>
+        <CloseIcon
+          onPress={handleClose} // This triggers navigation.goBack() on press
+        />
+        <Image style={styles.image} source={{ uri: imageURL }} />
+      </View>
       <View style={styles.detailsContainer}>
         <AppText style={styles.title}>{item.title}</AppText>
         <AppText style={styles.price}>{"$" + item.price}</AppText>
@@ -29,17 +39,20 @@ function ListingDetailScreen({ route }) {
           />
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  detailsContainer: {
-    padding: 10,
+  imageContainer: {
+    position: "relative",
   },
   image: {
     width: "100%",
     height: 300,
+  },
+  detailsContainer: {
+    padding: 10,
   },
   title: {
     fontSize: 24,
@@ -55,6 +68,7 @@ const styles = StyleSheet.create({
     padding: 5,
     backgroundColor: colors.screenWhite,
     borderRadius: 10,
+    marginVertical: 10,
   },
   userContainer: {
     marginVertical: 50,
