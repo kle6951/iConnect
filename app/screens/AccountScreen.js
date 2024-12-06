@@ -5,7 +5,6 @@ import { StyleSheet, View, FlatList } from "react-native";
 import colors from "../config/colors";
 import Icon from "../components/Icon";
 import ListItemSeperator from "../components/ListItems/ListItemSeperator";
-import useApi from "../hooks/useApi";
 import useAuth from "../auth/useAuth";
 
 const menuItems = [
@@ -18,15 +17,19 @@ const menuItems = [
   },
 ];
 function AccountScreen() {
-  const { user, logOut } = useAuth(); // Correct usage of useAuth
+  const { user, logOut } = useAuth();
 
   return (
     <Screen>
       <View style={styles.container}>
         <ListItem
-          title="Josh Benjamin"
-          description="josh123@mtroyal.ca"
-          image={require("../assets/images/studentProfile.jpeg")}
+          title={user?.full_name}
+          description={user?.email}
+          image={
+            user?.avatar
+              ? { uri: user.avatar } 
+              : require("../assets/images/userDefaultAvatar.png") 
+          }
         />
       </View>
       <View style={styles.container}>
