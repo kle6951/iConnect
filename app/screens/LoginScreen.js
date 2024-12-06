@@ -1,11 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, Image, Alert } from "react-native";
 import Screen from "../components/Screen";
 import * as Yup from "yup";
 import { AppFormField, SubmitButton, AppForm } from "../components/forms";
 import authApi from "../api/auth";
-import AuthContext from "../auth/context";
-import authUser from "../auth/storage";
+import useAuth from "../auth/useAuth";
 
 /* Use Formik to reduce code the complexity when handling multiple text input
 so we can remove useState */
@@ -17,8 +16,9 @@ const validationSchema = Yup.object().shape({
 });
 
 function LoginScreen() {
-  const authContext = useContext(AuthContext);
+  const { logIn } = useAuth(); // Use logIn function from useAuth
   const [loginFailed, setLoginFailed] = useState(false);
+  
   const handleLogin = async (userInfo) => {
     const { email, password } = userInfo;
     try {
@@ -31,10 +31,8 @@ function LoginScreen() {
         );
         return;
       }
-      // Will navigate here
       setLoginFailed(false);
-      authContext.setUser(response.data);
-      authUser.storeUser(response.data);
+      logIn(response); // Call logIn from useAuth with the response data
       Alert.alert("Login Successful", "Welcome back!");
       console.log("Login Successful:", response.data);
     } catch (error) {
@@ -42,6 +40,7 @@ function LoginScreen() {
       Alert.alert("An unexpected error occurred.");
     }
   };
+
   return (
     <Screen style={styles.container}>
       <Image
