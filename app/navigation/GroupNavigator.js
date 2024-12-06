@@ -7,6 +7,7 @@ import ListRoomate from "../screens/ListRoomate";
 import ListEditScreen from "../screens/ListEditScreen";
 import RoomateEditScreen from "../screens/RoomateEditScreen";
 import GroupScreen from "../screens/GroupScreen";
+import colors from "../config/colors";
 
 const Stack = createStackNavigator();
 
@@ -16,7 +17,13 @@ const GroupNavigator = () => {
       <Stack.Screen
         name="Activity"
         component={ActivityScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerTitle: "iConnect",
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: colors.white,
+        }}
       />
       <Stack.Screen
         name="GroupListings"
@@ -26,7 +33,7 @@ const GroupNavigator = () => {
       <Stack.Screen
         name="ListingItems"
         component={ListingItems}
-        options={{ headerTitle: "" }}
+        options={{ headerTitle: "", headerBackTitle: "" }}
       />
       <Stack.Screen
         name="ListingDetails"
@@ -36,7 +43,7 @@ const GroupNavigator = () => {
       <Stack.Screen
         name="ListingRoomate"
         component={ListRoomate}
-        options={{ headerTitle: "" }}
+        options={{ headerTitle: "", headerBackTitle: "" }}
       />
       <Stack.Screen
         name="ListingEdit"

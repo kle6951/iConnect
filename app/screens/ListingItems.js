@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList, View } from "react-native";
 import Screen from "../components/Screen";
 import Card from "../components/cards/Card";
@@ -11,10 +11,20 @@ import ActivityIndicator from "../components/ActivityIndicator";
 import useApi from "../hooks/useApi";
 
 function ListingItems({ navigation }) {
+  const [refreshing, setRefreshing] = useState(false);
   const getListingAPI = useApi(listingApi.getListings);
+
   useEffect(() => {
     getListingAPI.request(1, 2, 3);
   }, []);
+
+  // Function to handle refreshing the data
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await getListingAPI.request(1, 2, 3);
+    setRefreshing(false);
+  };
+
   return (
     <Screen style={styles.container}>
       {getListingAPI.error && (
@@ -22,7 +32,7 @@ function ListingItems({ navigation }) {
           <AppText>Couldn't retrieve the listings</AppText>
           <Button
             title="Retry"
-            onPress={() => getListingAPI.request(1, 2, 3)}
+            onPress={() => getListingAPI.request(1, 2, 3)} // Retry fetching data
           />
         </>
       )}
@@ -44,6 +54,8 @@ function ListingItems({ navigation }) {
             />
           );
         }}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
       />
       <View style={styles.createButtonContainer}>
         <CreateButton onPress={() => navigation.navigate("ListingEdit")} />
@@ -63,7 +75,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  // Adjusted the createButtonContainer to ensure it stays at the bottom of the screen
   createButtonContainer: {
     position: "absolute",
     bottom: 10,

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList, View } from "react-native";
 import Screen from "../components/Screen";
 import Card from "../components/cards/Card";
@@ -11,10 +11,17 @@ import ActivityIndicator from "../components/ActivityIndicator";
 import useApi from "../hooks/useApi";
 
 function ListRoomate({ navigation }) {
+  const [refreshing, setRefreshing] = useState(false);
   const getListingAPI = useApi(roomateListingsApi.getListings);
   useEffect(() => {
     getListingAPI.request(1, 2, 3);
   }, []);
+  // Function to handle refreshing the data
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await getListingAPI.request(1, 2, 3);
+    setRefreshing(false);
+  };
   return (
     <Screen style={styles.container}>
       {getListingAPI.error && (
@@ -45,6 +52,8 @@ function ListRoomate({ navigation }) {
             />
           );
         }}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
       />
       <View style={styles.createButtonContainer}>
         <CreateButton onPress={() => navigation.navigate("RoomateEdit")} />

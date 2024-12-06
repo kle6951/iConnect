@@ -5,6 +5,7 @@ import HomeScreen from "../screens/HomeScreen";
 import AccountScreen from "../screens/AccountScreen";
 import GroupButton from "./GroupButton";
 import GroupNavigator from "./GroupNavigator";
+import colors from "../config/colors";
 
 // creates a bottom tab navigator
 const Tab = createBottomTabNavigator();
@@ -25,7 +26,11 @@ const AppNavigator = () => (
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="home" color={color} size={size} />
         ),
-        headerShown: false,
+        headerTitle: "iConnect",
+        headerStyle: {
+          backgroundColor: colors.primary,
+        },
+        headerTintColor: colors.white,
       }}
     />
     <Tab.Screen
@@ -48,7 +53,11 @@ const AppNavigator = () => (
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="account" color={color} size={size} />
         ),
-        headerShown: false,
+        headerTitle: "iConnect",
+        headerTintColor: colors.white,
+        headerStyle: {
+          backgroundColor: colors.primary,
+        },
       }}
     />
   </Tab.Navigator>
