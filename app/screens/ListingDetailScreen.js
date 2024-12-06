@@ -3,17 +3,24 @@ import { View, Image, StyleSheet } from "react-native";
 import AppText from "../components/AppText";
 import colors from "../config/colors";
 import ListItem from "../components/ListItems/ListItem";
+import PostCaption from "../components/Post/PostCaption";
 
 function ListingDetailScreen({ route }) {
-  const listing = route.params;
+  const { item } = route.params;
+  const images = JSON.parse(item.images);
+  const imageURL = images[0]?.url;
 
   return (
     <View>
-      <Image style={styles.image} source={listing.image} />
-      <View style={styles.detailContainer}>
-        <AppText style={styles.title}>{listing.title}</AppText>
-        <AppText style={styles.price}>${listing.price}</AppText>
-        <AppText style={styles.description}>{listing.description}</AppText>
+      <Image style={styles.image} source={{ uri: imageURL }} />
+      <View style={styles.detailsContainer}>
+        <AppText style={styles.title}>{item.title}</AppText>
+        <AppText style={styles.price}>{"$" + item.price}</AppText>
+        {item.description && (
+          <View style={styles.postBox}>
+            <PostCaption caption={item.description} />
+          </View>
+        )}
         <View style={styles.userContainer}>
           <ListItem
             image={require("../assets/images/studentProfile.jpeg")}
@@ -27,7 +34,7 @@ function ListingDetailScreen({ route }) {
 }
 
 const styles = StyleSheet.create({
-  detailContainer: {
+  detailsContainer: {
     padding: 10,
   },
   image: {
@@ -39,15 +46,15 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   price: {
-    color: colors.primary, // Set the price color to blue (assuming colors.primary is blue)
+    color: colors.primary,
     fontWeight: "bold",
     fontSize: 20,
     marginVertical: 5,
   },
-  description: {
-    color: colors.darkGray, // Set the description text to a darker color (e.g., gray)
-    fontSize: 16,
-    marginVertical: 5,
+  postBox: {
+    padding: 5,
+    backgroundColor: colors.screenWhite,
+    borderRadius: 10,
   },
   userContainer: {
     marginVertical: 50,

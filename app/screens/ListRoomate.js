@@ -41,7 +41,7 @@ function ListRoomate({ navigation }) {
               price={"$" + item.price}
               imageURL={imageURL}
               priceStyle={styles.priceStyle}
-              onPress={() => navigation.navigate("ListingDetails", item)}
+              onPress={() => navigation.navigate("ListingDetails", { item })}
             />
           );
         }}
