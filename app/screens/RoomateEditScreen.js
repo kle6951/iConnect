@@ -47,7 +47,7 @@ const categories = [
     IconComponentName: MaterialIcons,
   },
 ];
-function RoomateEditScreen() {
+function RoomateEditScreen({ navigation }) {
   const location = useLocation();
   const [uploadVisible, setUploadVisible] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -63,6 +63,7 @@ function RoomateEditScreen() {
       return alert("Could not save the listing");
     }
     resetForm();
+    navigation.goBack();
   };
   return (
     <Screen>
