@@ -28,7 +28,7 @@ const GroupNavigator = () => {
       <Stack.Screen
         name="GroupListings"
         component={GroupScreen}
-        options={{ headerTitle: "" }}
+        options={{ headerTitle: "", headerBackTitle: "" }}
       />
       <Stack.Screen
         name="ListingItems"

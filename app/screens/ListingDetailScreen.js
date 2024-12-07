@@ -18,9 +18,7 @@ function ListingDetailScreen({ route, navigation }) {
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.imageContainer}>
-        <CloseIcon
-          onPress={handleClose} // This triggers navigation.goBack() on press
-        />
+        <CloseIcon onPress={handleClose} />
         <Image style={styles.image} source={{ uri: imageURL }} />
       </View>
       <View style={styles.detailsContainer}>
@@ -35,11 +33,11 @@ function ListingDetailScreen({ route, navigation }) {
           <ListItem
             image={
               item.user_avatar
-                ? { uri: JSON.parse(item.user_avatar)[0]?.url } 
-                : require("../assets/images/studentProfile.jpeg") 
+                ? { uri: JSON.parse(item.user_avatar)[0]?.url }
+                : require("../assets/images/studentProfile.jpeg")
             }
             title={item.user_name || "Unknown User"}
-            description={item.user_email}
+            description={item.user_listing_count + " Listing(s)"}
           />
         </View>
       </View>

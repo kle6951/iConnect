@@ -1,6 +1,7 @@
 import client from "./client";
 import { storage } from "./firebaseConfig";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import authStorage from "../auth/storage";
 
 const endPoint = "/roomateListings";
 
@@ -48,11 +49,17 @@ const uploadToFirebase = async (imageUri, setProgress) => {
 const getListings = () => client.get(endPoint);
 // POST command
 const addListings = async (listing, onUploadProgress) => {
+  const user = await authStorage.getUser();
+  if (!user || !user.id) {
+    alert("User not found. Please log in again.");
+    return { ok: false };
+  }
   const data = new FormData();
   data.append("title", listing.title);
   data.append("price", listing.price);
   data.append("description", listing.description);
   data.append("category_id", listing.category.value);
+  data.append("user_id", user.id);
 
   const imageUrls = [];
 
