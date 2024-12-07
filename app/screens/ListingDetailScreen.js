@@ -33,9 +33,13 @@ function ListingDetailScreen({ route, navigation }) {
         )}
         <View style={styles.userContainer}>
           <ListItem
-            image={require("../assets/images/studentProfile.jpeg")}
-            title={"Josh Benjamin"}
-            description={"5 Listings"}
+            image={
+              item.user_avatar
+                ? { uri: JSON.parse(item.user_avatar)[0]?.url } 
+                : require("../assets/images/studentProfile.jpeg") 
+            }
+            title={item.user_name || "Unknown User"}
+            description={item.user_email}
           />
         </View>
       </View>

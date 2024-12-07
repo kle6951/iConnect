@@ -18,6 +18,7 @@ const menuItems = [
 ];
 function AccountScreen() {
   const { user, logOut } = useAuth();
+  console.log(user);
 
   return (
     <Screen>
@@ -27,8 +28,8 @@ function AccountScreen() {
           description={user?.email}
           image={
             user?.avatar
-              ? { uri: user.avatar } 
-              : require("../assets/images/userDefaultAvatar.png") 
+              ? { uri: JSON.parse(user.avatar)[0]?.url } 
+              : require("../assets/images/userDefaultAvatar.png") // Fallback to default
           }
         />
       </View>
