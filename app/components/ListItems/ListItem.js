@@ -9,7 +9,6 @@ function ListItem({
   image,
   IconComponent,
   onPress,
-  // renderRightActions,
 }) {
   return (
     <TouchableHighlight underlayColor={colors.screenWhite} onPress={onPress}>

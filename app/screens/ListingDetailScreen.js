@@ -1,5 +1,5 @@
-import React from "react";
-import { View, ScrollView, Image, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, FlatList, Image, StyleSheet, Dimensions } from "react-native";
 import AppText from "../components/AppText";
 import colors from "../config/colors";
 import ListItem from "../components/ListItems/ListItem";
@@ -8,18 +8,44 @@ import CloseIcon from "../components/Post/CloseIcon";
 
 function ListingDetailScreen({ route, navigation }) {
   const { item } = route.params;
-  const images = JSON.parse(item.images);
-  const imageURL = images[0]?.url;
+  const images = JSON.parse(item.images); // Array of image objects
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const { width } = Dimensions.get("window"); // Get the screen width for full-width images
+
+  const handleScroll = (event) => {
+    const contentOffsetX = event.nativeEvent.contentOffset.x;
+    const index = Math.floor(contentOffsetX / width); // Adjust index based on screen width
+    setCurrentIndex(index);
+  };
 
   const handleClose = () => {
     navigation.goBack();
   };
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+    <View style={{ flex: 1 }}>
       <View style={styles.imageContainer}>
         <CloseIcon onPress={handleClose} />
-        <Image style={styles.image} source={{ uri: imageURL }} />
+        <FlatList
+          data={images}
+          horizontal
+          pagingEnabled // Enables snapping to each photo
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <Image source={{ uri: item?.url }} style={[styles.image, { width }]} />
+          )}
+          onScroll={handleScroll}
+          showsHorizontalScrollIndicator={false}
+        />
+        {images && images.length > 0 && (
+          <View style={styles.indexContainer}>
+            <AppText style={styles.indexText}>
+              {currentIndex + 1} / {images.length}
+            </AppText>
+          </View>
+        )}
       </View>
       <View style={styles.detailsContainer}>
         <AppText style={styles.title}>{item.title}</AppText>
@@ -41,17 +67,20 @@ function ListingDetailScreen({ route, navigation }) {
           />
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   imageContainer: {
     position: "relative",
-  },
-  image: {
     width: "100%",
     height: 300,
+  },
+  image: {
+    height: 300,
+    resizeMode: "cover",
+    borderRadius: 10,
   },
   detailsContainer: {
     padding: 10,
@@ -74,6 +103,19 @@ const styles = StyleSheet.create({
   },
   userContainer: {
     marginVertical: 50,
+  },
+  indexContainer: {
+    position: "absolute",
+    bottom: 10,
+    left: 10,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    padding: 5,
+    borderRadius: 5,
+  },
+  indexText: {
+    fontSize: 12,
+    fontWeight: "bold",
+    color: colors.white,
   },
 });
 
