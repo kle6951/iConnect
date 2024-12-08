@@ -8,7 +8,7 @@ import { AppForm, FormImagePicker, AppFormField as FormFiled } from "../forms";
 import * as Yup from "yup";
 
 const validationSchema = Yup.object().shape({
-  description: Yup.string().required().min(1).label("Share your exciting news"),
+  caption: Yup.string().required().min(1).label("Share your exciting news"),
   images: Yup.array(),
 });
 
@@ -39,7 +39,7 @@ const PostBox = () => {
           </View>
           <AppForm
             initialValues={{
-              description: "",
+              caption: "",
               images: [],
             }}
             onSubmit={() => console.log("submit")}
@@ -48,7 +48,7 @@ const PostBox = () => {
             <View style={styles.formContainer}>
               <FormImagePicker name="images" style={styles.imagePicker} />
               <FormFiled
-                name="description"
+                name="caption"
                 placeholder="Share your exciting news"
                 multiline={true}
                 scrollEnabled={true}

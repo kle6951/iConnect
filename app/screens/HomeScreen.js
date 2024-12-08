@@ -1,108 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import colors from "../config/colors";
 import Screen from "../components/Screen";
 import Post from "../components/Post/Post";
 import PostBox from "../components/Post/PostBox";
-
-const samplePost = [
-  {
-    user: {
-      name: "John Smith",
-      avatar: require("../assets/images/studentProfile.jpeg"),
-    },
-    caption: `University Basketball Showdown 2024
-
-🏀 Get Ready to Cheer for Your Team! 🏀
-Join us for an electrifying basketball event where campus pride meets thrilling competition.
-
-📅 Date: [Insert date]
-⏰ Time: [Insert time]
-📍 Venue: [Insert venue]
-
-🔥 Highlights:
-- High-energy games featuring [Team A vs. Team B/University teams].
-- Half-time show with live performances.
-- Food trucks and giveaways for fans.
-
-🎟️ Admission: [Free/Ticket info here]
-📢 Don’t miss out on the slam dunks, buzzer-beaters, and unforgettable moments!
-
-📲 Stay updated: [Insert social media or event page link]
-
-Let’s pack the stands and make it a night to remember!`,
-    photos: [
-      require("../assets/images/MruGame.webp"),
-      require("../assets/images/mruCampus.jpg"),
-      require("../assets/images/basketballGame.webp"),
-    ],
-  },
-  {
-    user: {
-      name: "David Jones",
-      avatar: require("../assets/images/studentProfile_02.jpg"),
-    },
-    caption: `Amazing Campus Event 2024
-
-🎉 Come celebrate with us as we mark another fantastic year of success!
-
-📅 Date: [Insert date]
-⏰ Time: [Insert time]
-📍 Venue: [Insert venue]
-
-🔥 Highlights:
-- Fun activities for everyone.
-- Guest speakers from different fields.
-- Free food and drinks for all.
-
-🎟️ Admission: [Free/Ticket info here]
-📢 You won't want to miss this event!
-
-📲 Follow us on [Insert social media link] for updates.`,
-    photos: [],
-  },
-  {
-    user: {
-      name: "Emily Davis",
-      avatar: require("../assets/images/studentProfile_02.jpg"),
-    },
-    caption: `Tech Conference 2024
-
-🚀 Join us at the most anticipated tech conference of the year, where industry leaders and innovators come together to showcase the latest in technology.
-
-📅 Date: [Insert date]
-⏰ Time: [Insert time]
-📍 Venue: [Insert venue]
-
-🔥 Highlights:
-- Keynote speeches from renowned tech entrepreneurs.
-- Workshops and hands-on sessions on AI, blockchain, and more.
-- Networking opportunities with top companies.
-
-🎟️ Admission: [Free/Ticket info here]
-📢 Don’t miss the chance to be part of the future of tech!
-
-📲 Follow us for updates and more information.`,
-    photos: [],
-  },
-];
+import postsApi from "../api/posts";
+import useApi from "../hooks/useApi";
+import AppText from "../components/AppText";
+import Button from "../components/AppButton";
+import ActivityIndicator from "../components/ActivityIndicator";
 
 const HomeScreen = () => {
-  const [posts, setPosts] = useState(samplePost);
+  const getPostsApi = useApi(postsApi.getPosts);
 
-  const addPost = (newPost) => {
-    setPosts([newPost, ...posts]);
-  };
+  useEffect(() => {
+    getPostsApi.request();
+  }, []);
 
   return (
     <Screen style={styles.container}>
-      <PostBox onPostSubmit={addPost} />
+      <PostBox onPostSubmit={() => console.log("submit post")} />
+      {getPostsApi.error && (
+        <>
+          <AppText>Couldn't retrieve the posts</AppText>
+          <Button
+            title="Retry"
+            onPress={getPostsApi.request} // Retry fetching data
+          />
+        </>
+      )}
+      <ActivityIndicator visible={getPostsApi.loading} />
       <FlatList
-        data={posts}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <Post user={item.user} caption={item.caption} photos={item.photos} />
-        )}
+        data={getPostsApi.data}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => {
+          const images = JSON.parse(item.images);
+          const imageURL = images[0]?.url;
+
+          const avatarImage = item.user_avatar
+            ? { uri: JSON.parse(item.user_avatar)[0]?.url }
+            : require("../assets/images/studentProfile.jpeg");
+
+          return (
+            <Post
+              user={{
+                name: item.user_name,
+                avatar: avatarImage,
+              }}
+              caption={item.caption}
+              photos={images}
+            />
+          );
+        }}
         contentContainerStyle={styles.flatListContent}
       />
     </Screen>
@@ -111,12 +60,12 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
+    flex: 1,
     padding: 10,
     backgroundColor: colors.screenWhite,
   },
   flatListContent: {
-    paddingBottom: 20, 
+    paddingBottom: 20,
   },
 });
 
