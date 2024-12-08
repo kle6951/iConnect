@@ -4,7 +4,12 @@ import colors from "../../config/colors";
 import AppText from "../AppText/AppText";
 import Screen from "../../components/Screen";
 import CloseIcon from "../../components/Post/CloseIcon";
-import { AppForm, FormImagePicker, AppFormField as FormFiled } from "../forms";
+import {
+  AppForm,
+  FormImagePicker,
+  AppFormField as FormFiled,
+  SubmitButton,
+} from "../forms";
 import * as Yup from "yup";
 
 const validationSchema = Yup.object().shape({
@@ -29,13 +34,17 @@ const PostBox = () => {
       >
         <Screen>
           <View style={styles.header}>
-            <CloseIcon
-              onPress={() => setModalVisible(false)}
-              backgroundColor="white"
-              style={styles.closeIcon}
-            />
-            <AppText style={styles.headerTitle}>Create Post</AppText>
-            <AppText style={styles.postButton}>Post</AppText>
+            <View style={styles.leftContainer}>
+              <CloseIcon
+                onPress={() => setModalVisible(false)}
+                backgroundColor="white"
+                style={styles.closeIcon}
+              />
+            </View>
+            <View style={styles.centerContainer}>
+              <AppText style={styles.headerTitle}>Create Post</AppText>
+            </View>
+            <View style={styles.rightContainer} />
           </View>
           <AppForm
             initialValues={{
@@ -54,6 +63,7 @@ const PostBox = () => {
                 scrollEnabled={true}
                 style={styles.textInput}
               />
+              <SubmitButton title="Post" />
             </View>
           </AppForm>
         </Screen>
@@ -78,20 +88,22 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
   },
+  leftContainer: {
+    flex: 1,
+  },
+  centerContainer: {
+    flex: 2,
+    alignItems: "center",
+  },
+  rightContainer: {
+    flex: 1,
+  },
   closeIcon: {
-    marginRight: 10,
+    alignSelf: "flex-start",
   },
   headerTitle: {
-    flex: 1,
-    textAlign: "center",
     fontWeight: "bold",
     fontSize: 20,
-  },
-  postButton: {
-    fontWeight: "bold",
-    color: colors.primary,
-    fontSize: 20,
-    marginRight: 10,
   },
   formContainer: {
     paddingHorizontal: 10,
@@ -109,7 +121,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   textInput: {
-    height: "81%",
+    height: 500,
     textAlignVertical: "top",
     padding: 5,
     borderColor: colors.border,

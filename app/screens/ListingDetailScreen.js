@@ -34,7 +34,10 @@ function ListingDetailScreen({ route, navigation }) {
           pagingEnabled // Enables snapping to each photo
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
-            <Image source={{ uri: item?.url }} style={[styles.image, { width }]} />
+            <Image
+              source={{ uri: item?.url }}
+              style={[styles.image, { width }]}
+            />
           )}
           onScroll={handleScroll}
           showsHorizontalScrollIndicator={false}
@@ -60,7 +63,7 @@ function ListingDetailScreen({ route, navigation }) {
             image={
               item.user_avatar
                 ? { uri: JSON.parse(item.user_avatar)[0]?.url }
-                : require("../assets/images/studentProfile.jpeg")
+                : require("../assets/images/userDefaultAvatar.png")
             }
             title={item.user_name || "Unknown User"}
             description={item.user_listing_count + " Listing(s)"}

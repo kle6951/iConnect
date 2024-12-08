@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import colors from "../config/colors";
 import Screen from "../components/Screen";
@@ -11,11 +11,18 @@ import Button from "../components/AppButton";
 import ActivityIndicator from "../components/ActivityIndicator";
 
 const HomeScreen = () => {
+  const [refreshing, setRefreshing] = useState(false);
   const getPostsApi = useApi(postsApi.getPosts);
 
   useEffect(() => {
     getPostsApi.request();
   }, []);
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await getPostsApi.request(1, 2, 3);
+    setRefreshing(false);
+  };
 
   return (
     <Screen style={styles.container}>
@@ -39,7 +46,7 @@ const HomeScreen = () => {
 
           const avatarImage = item.user_avatar
             ? { uri: JSON.parse(item.user_avatar)[0]?.url }
-            : require("../assets/images/studentProfile.jpeg");
+            : require("../assets/images/userDefaultAvatar.png");
 
           return (
             <Post
@@ -53,6 +60,8 @@ const HomeScreen = () => {
           );
         }}
         contentContainerStyle={styles.flatListContent}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
       />
     </Screen>
   );
