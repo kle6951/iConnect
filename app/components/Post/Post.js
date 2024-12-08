@@ -5,10 +5,14 @@ import PostCaption from "./PostCaption";
 import PostPhotos from "./PostPhotos";
 import colors from "../../config/colors";
 
-const Post = ({ user, caption, photos }) => {
+const Post = ({ user, caption, photos, createdAt }) => {
   return (
     <View style={styles.container}>
-      <PostHeader avatar={user.avatar} username={user.name} />
+      <PostHeader
+        avatar={user.avatar}
+        username={user.name}
+        createdAt={createdAt}
+      />
       <PostCaption caption={caption} />
       {photos && <PostPhotos photos={photos} />}
     </View>

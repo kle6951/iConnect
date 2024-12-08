@@ -47,6 +47,7 @@ const HomeScreen = () => {
           const avatarImage = item.user_avatar
             ? { uri: JSON.parse(item.user_avatar)[0]?.url }
             : require("../assets/images/userDefaultAvatar.png");
+          const createdAt = item.created_at;
 
           return (
             <Post
@@ -56,6 +57,7 @@ const HomeScreen = () => {
               }}
               caption={item.caption}
               photos={images}
+              createdAt={createdAt}
             />
           );
         }}
