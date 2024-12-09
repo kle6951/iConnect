@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { FlatList, StyleSheet, ScrollView, RefreshControl } from "react-native";
 import Screen from "../components/Screen";
 import AppText from "../components/AppText";
 import MyListCard from "../components/cards/MyListCard";
@@ -10,15 +10,27 @@ import useApi from "../hooks/useApi";
 import roomateListingsApi from "../api/roomateListings";
 
 const MyRoomateListings = ({ navigation }) => {
+  const [refreshing, setRefreshing] = useState(false);
   const getListings = useApi(roomateListingsApi.getUserListings);
   useEffect(() => {
     getListings.request(1, 2, 3);
   }, []);
 
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await getListings.request(1, 2, 3);
+    setRefreshing(false);
+  };
+
   return (
     <Screen style={styles.container}>
       {getListings.data.length === 0 ? (
-        <View style={styles.emptyContainer}>
+        <ScrollView
+          contentContainerStyle={styles.emptyContainer}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+          }
+        >
           <AppText style={styles.emptyText}>Your listing is empty</AppText>
           <Icon
             name="trash"
@@ -28,7 +40,7 @@ const MyRoomateListings = ({ navigation }) => {
             backgroundColor={colors.screenWhite}
             style={styles.icon}
           />
-        </View>
+        </ScrollView>
       ) : (
         <>
           <AppText style={styles.text}>
@@ -50,6 +62,8 @@ const MyRoomateListings = ({ navigation }) => {
                 />
               );
             }}
+            refreshing={refreshing}
+            onRefresh={handleRefresh}
           />
         </>
       )}
