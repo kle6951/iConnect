@@ -47,6 +47,13 @@ const uploadToFirebase = async (imageUri, setProgress) => {
 
 // GET command
 const getListings = () => client.get(endPoint);
+
+// GET user's listings
+const getUserListings = async () => {
+  const user = await authStorage.getUser();
+  const endpoint = "/user/" + user.id + "/roomateListings";
+  return client.get(endpoint);
+};
 // POST command
 const addListings = async (listing, onUploadProgress) => {
   const user = await authStorage.getUser();
@@ -100,4 +107,5 @@ const addListings = async (listing, onUploadProgress) => {
 export default {
   addListings,
   getListings,
+  getUserListings,
 };

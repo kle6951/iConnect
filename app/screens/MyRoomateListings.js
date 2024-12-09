@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import Screen from "../components/Screen";
 import AppText from "../components/AppText";
@@ -6,23 +6,18 @@ import MyListCard from "../components/cards/MyListCard";
 import Icon from "../components/Icon";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../config/colors";
+import useApi from "../hooks/useApi";
+import roomateListingsApi from "../api/roomateListings";
 
-const MyRoomateListings = () => {
-  const listings = [
-    {
-      id: 1,
-      title: "Listing 1",
-      image: require("../assets/images/textbook.jpg"),
-    },
-    {
-      id: 2,
-      title: "Listing 2",
-      image: require("../assets/images/textbook.jpg"),
-    },
-  ];
+const MyRoomateListings = ({ navigation }) => {
+  const getListings = useApi(roomateListingsApi.getUserListings);
+  useEffect(() => {
+    getListings.request(1, 2, 3);
+  }, []);
+
   return (
     <Screen style={styles.container}>
-      {listings.length === 0 ? (
+      {getListings.data.length === 0 ? (
         <View style={styles.emptyContainer}>
           <AppText style={styles.emptyText}>Your listing is empty</AppText>
           <Icon
@@ -37,14 +32,24 @@ const MyRoomateListings = () => {
       ) : (
         <>
           <AppText style={styles.text}>
-            You currently have {listings.length} listing(s):
+            You currently have {getListings.data.length} listing(s):
           </AppText>
           <FlatList
-            data={listings}
+            data={getListings.data}
             keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <MyListCard title={item.title} image={item.image} />
-            )}
+            renderItem={({ item }) => {
+              const images = JSON.parse(item.images);
+              const imageURL = images[0]?.url;
+              return (
+                <MyListCard
+                  title={item.title}
+                  image={imageURL}
+                  onPress={() =>
+                    navigation.navigate("MyListDetailScreen", { item })
+                  }
+                />
+              );
+            }}
           />
         </>
       )}
