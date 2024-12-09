@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import AccountScreen from "../screens/AccountScreen";
 import MyListingScreen from "../screens/MyListingsScreen";
+import MyRoomateListings from "../screens/MyRoomateListings";
 import colors from "../config/colors";
 
 const Stack = createStackNavigator();
@@ -23,6 +24,11 @@ const AccountNavigator = () => {
       <Stack.Screen
         name="MyListing"
         component={MyListingScreen}
+        options={{ headerTitle: "", headerBackTitle: "" }}
+      />
+      <Stack.Screen
+        name="MyRoomateListing"
+        component={MyRoomateListings}
         options={{ headerTitle: "", headerBackTitle: "" }}
       />
     </Stack.Navigator>

@@ -6,21 +6,33 @@ import colors from "../config/colors";
 import Icon from "../components/Icon";
 import ListItemSeperator from "../components/ListItems/ListItemSeperator";
 import useAuth from "../auth/useAuth";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 
 const menuItems = [
   {
-    title: "My Listings",
+    title: "Textbook Listings",
     icon: {
-      name: "format-list-bulleted",
+      name: "book",
       backgroundColor: colors.primary,
+      IconComponentName: AntDesign,
+    },
+  },
+  {
+    title: "Accomodation Listings",
+    icon: {
+      name: "house",
+      backgroundColor: colors.primary,
+      IconComponentName: MaterialIcons,
     },
   },
 ];
 function AccountScreen({ navigation }) {
   const { user, logOut } = useAuth();
   const navigateAccTab = (title) => {
-    if (title === "My Listings") {
+    if (title === "Textbook Listings") {
       navigation.navigate("MyListing");
+    } else if (title === "Accomodation Listings") {
+      navigation.navigate("MyRoomateListing");
     }
   };
   return (
@@ -46,7 +58,7 @@ function AccountScreen({ navigation }) {
               title={item.title}
               IconComponent={
                 <Icon
-                  ComponentName={item.icon.ComponentName}
+                  ComponentName={item.icon.IconComponentName}
                   name={item.icon.name}
                   backgroundColor={item.icon.backgroundColor}
                 />
