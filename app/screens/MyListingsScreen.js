@@ -30,7 +30,7 @@ const MyListingScreen = () => {
             size={200}
             iconColor={colors.grey}
             ComponentName={Ionicons}
-            backgroundColor={colors.white}
+            backgroundColor={colors.screenWhite}
             style={styles.icon}
           />
         </View>

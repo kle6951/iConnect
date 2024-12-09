@@ -2,10 +2,10 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
-import AccountScreen from "../screens/AccountScreen";
 import GroupButton from "./GroupButton";
 import GroupNavigator from "./GroupNavigator";
 import colors from "../config/colors";
+import AccountNavigator from "./AccountNavigator";
 
 // creates a bottom tab navigator
 const Tab = createBottomTabNavigator();
@@ -48,16 +48,12 @@ const AppNavigator = () => (
     />
     <Tab.Screen
       name="Account"
-      component={AccountScreen}
+      component={AccountNavigator}
       options={{
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="account" color={color} size={size} />
         ),
-        headerTitle: "iConnect",
-        headerTintColor: colors.white,
-        headerStyle: {
-          backgroundColor: colors.primary,
-        },
+        headerShown: false,
       }}
     />
   </Tab.Navigator>

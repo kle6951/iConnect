@@ -16,9 +16,13 @@ const menuItems = [
     },
   },
 ];
-function AccountScreen() {
+function AccountScreen({ navigation }) {
   const { user, logOut } = useAuth();
-
+  const navigateAccTab = (title) => {
+    if (title === "My Listings") {
+      navigation.navigate("MyListing");
+    }
+  };
   return (
     <Screen>
       <View style={styles.container}>
@@ -47,7 +51,7 @@ function AccountScreen() {
                   backgroundColor={item.icon.backgroundColor}
                 />
               }
-              onPress={() => console.log("pressed")}
+              onPress={() => navigateAccTab(item.title)}
             />
           )}
         />

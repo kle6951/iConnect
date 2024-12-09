@@ -7,7 +7,6 @@ import AuthNavigator from "./app/navigation/AuthNavigator";
 import AuthContext from "./app/auth/context";
 import authUser from "./app/auth/storage";
 import * as SplashScreen from "expo-splash-screen";
-import MyListingScreen from "./app/screens/MyListingsScreen";
 
 // Main App component
 export default function App() {
@@ -34,12 +33,11 @@ export default function App() {
   }
 
   return (
-    // <AuthContext.Provider value={{ user, setUser }}>
-    //   <OfflineNotice />
-    //   <NavigationContainer theme={NavigationTheme}>
-    //     {user ? <AppNavigator /> : <AuthNavigator />}
-    //   </NavigationContainer>
-    // </AuthContext.Provider>
-    <MyListingScreen/>
+    <AuthContext.Provider value={{ user, setUser }}>
+      <OfflineNotice />
+      <NavigationContainer theme={NavigationTheme}>
+        {user ? <AppNavigator /> : <AuthNavigator />}
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 }
