@@ -3,7 +3,7 @@ import { FlatList, StyleSheet } from "react-native";
 import Screen from "../components/Screen";
 import ListCard from "../components/cards/ListCard";
 
-const marketListing = [
+const activityListing = [
   {
     id: 1,
     title: "Textbook Market",
@@ -21,7 +21,7 @@ const marketListing = [
   },
 ];
 
-function MarketScreen({ navigation }) {
+function ActivityScreen({ navigation }) {
   const navigateToListing = (title) => {
     if (title === "Textbook Market") {
       navigation.navigate("ListingItems"); // Navigate to ListingItems
@@ -35,7 +35,7 @@ function MarketScreen({ navigation }) {
   return (
     <Screen style={styles.container}>
       <FlatList
-        data={marketListing}
+        data={activityListing}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <ListCard
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MarketScreen;
+export default ActivityScreen;
