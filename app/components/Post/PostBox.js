@@ -7,10 +7,11 @@ import CloseIcon from "../../components/Post/CloseIcon";
 import {
   AppForm,
   FormImagePicker,
-  AppFormField as FormFiled,
+  AppFormField as FormField,
   SubmitButton,
 } from "../forms";
 import * as Yup from "yup";
+import postsApi from "../../api/posts";
 
 const validationSchema = Yup.object().shape({
   caption: Yup.string().required().min(1).label("Share your exciting news"),
@@ -19,6 +20,19 @@ const validationSchema = Yup.object().shape({
 
 const PostBox = () => {
   const [modalVisible, setModalVisible] = useState(false);
+
+  const handleSubmit = async (post, { resetForm }) => {
+    const result = await postsApi.addPosts(post);
+
+    if (!result.ok) {
+      return alert("Could not save the post");
+    }
+
+    resetForm();
+    alert("Post is uploaded!");
+    setModalVisible(false);
+  };
+
   return (
     <>
       <TouchableOpacity onPress={() => setModalVisible(true)}>
@@ -51,12 +65,12 @@ const PostBox = () => {
               caption: "",
               images: [],
             }}
-            onSubmit={() => console.log("submit")}
+            onSubmit={handleSubmit}
             validationSchema={validationSchema}
           >
             <View style={styles.formContainer}>
               <FormImagePicker name="images" style={styles.imagePicker} />
-              <FormFiled
+              <FormField
                 name="caption"
                 placeholder="Share your exciting news"
                 multiline={true}

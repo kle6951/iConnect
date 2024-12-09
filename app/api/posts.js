@@ -11,7 +11,7 @@ const uploadToFirebase = async (imageUri, setProgress) => {
     const response = await fetch(imageUri);
     const blob = await response.blob();
 
-    const filename = `postsImages/${Date.now()}_${imageUri.split("/").pop()}`;
+    const filename = `postImages/${Date.now()}_${imageUri.split("/").pop()}`;
     const imageRef = ref(storage, filename);
 
     const uploadTask = uploadBytesResumable(imageRef, blob);
@@ -60,7 +60,7 @@ const addPosts = async (posts, onUploadProgress) => {
 
   const imageUrls = [];
   try {
-    for (const imageUri of listing.images) {
+    for (const imageUri of posts.images) {
       try {
         const firebaseUrl = await uploadToFirebase(imageUri, onUploadProgress);
         const imageName = imageUri.split("/").pop(); // Extracting image name
@@ -75,16 +75,16 @@ const addPosts = async (posts, onUploadProgress) => {
     // Store images as JSON with "url" and "name"
     data.append("images", JSON.stringify(imageUrls));
 
-    // console.log("Preparing to upload listing to endpoint...");
+    // console.log("Preparing to upload post to endpoint...");
     const response = await client.post(endPoint, data, {
       onUploadProgress: (progress) =>
         onUploadProgress(progress.loaded / progress.total),
     });
-    // console.log("Listing upload completed:", response);
+    // console.log("post upload completed:", response);
     return response;
   } catch (error) {
-    console.error("Error posting listing:", error.message);
-    alert("Failed to save the listing. Please try again later.");
+    console.error("Error posting post:", error.message);
+    alert("Failed to save the posts. Please try again later.");
     return { ok: false };
   }
 };
