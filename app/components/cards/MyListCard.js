@@ -8,7 +8,7 @@ function MyListCard({ image, title, onPress, onDelete }) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
-        <Image source={image} style={styles.image} />
+        <Image source={{ uri: image }} style={styles.image} />
         <View style={styles.overlay} />
         <View style={styles.textContainer}>
           <AppText style={styles.title}>{title}</AppText>
