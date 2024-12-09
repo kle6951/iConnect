@@ -13,7 +13,6 @@ import ActivityIndicator from "../components/ActivityIndicator";
 const HomeScreen = () => {
   const [refreshing, setRefreshing] = useState(false);
   const getPostsApi = useApi(postsApi.getPosts);
-
   useEffect(() => {
     getPostsApi.request();
   }, []);

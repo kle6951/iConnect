@@ -6,20 +6,22 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 function MyListCard({ image, title, onPress, onDelete }) {
   return (
-    <View style={styles.container}>
-      <Image source={image} style={styles.image} />
-      <View style={styles.overlay} />
-      <View style={styles.textContainer}>
-        <AppText style={styles.title}>{title}</AppText>
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.container}>
+        <Image source={image} style={styles.image} />
+        <View style={styles.overlay} />
+        <View style={styles.textContainer}>
+          <AppText style={styles.title}>{title}</AppText>
+        </View>
+        <TouchableOpacity onPress={onDelete} style={styles.deleteIcon}>
+          <MaterialCommunityIcons
+            name="trash-can"
+            size={24}
+            color={colors.white}
+          />
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={onDelete} style={styles.deleteIcon}>
-        <MaterialCommunityIcons
-          name="trash-can"
-          size={24}
-          color={colors.white}
-        />
-      </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 }
 

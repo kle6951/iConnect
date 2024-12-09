@@ -8,21 +8,9 @@ import { Ionicons } from "@expo/vector-icons";
 import colors from "../config/colors";
 
 const MyListingScreen = () => {
-  const listings = [
-    {
-      id: 1,
-      title: "Listing 1",
-      image: require("../assets/images/textbook.jpg"),
-    },
-    {
-      id: 2,
-      title: "Listing 2",
-      image: require("../assets/images/textbook.jpg"),
-    },
-  ];
   return (
     <Screen style={styles.container}>
-      {listings.length === 0 ? (
+      {[].length === 0 ? (
         <View style={styles.emptyContainer}>
           <AppText style={styles.emptyText}>Your listing is empty</AppText>
           <Icon
@@ -40,7 +28,7 @@ const MyListingScreen = () => {
             You currently have {listings.length} listing(s):
           </AppText>
           <FlatList
-            data={listings}
+            data={[]}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <MyListCard title={item.title} image={item.image} />
