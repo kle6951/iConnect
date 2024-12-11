@@ -18,8 +18,6 @@ Key features of iConnect include:
 
     Account Page: View and manage all of your listings in both the Textbook and Find My Roommate markets. You can easily delete any listings you no longer need.
 
-## Table of Contents
-
 ## How to get started
 
 1. Install dependencies
