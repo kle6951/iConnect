@@ -1,10 +1,28 @@
 import client from "./client";
 import { storage } from "./firebaseConfig";
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import {
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+  deleteObject,
+} from "firebase/storage";
 import authStorage from "../auth/storage";
 
 const endPoint = "/roomateListings";
 
+// Delete images from Firebase
+const deleteFromFirebase = async (imageName) => {
+  try {
+    const imageRef = ref(storage, `roomateListings/${imageName}`);
+    await deleteObject(imageRef);
+
+    console.log(`Image ${imageName} deleted successfully from Firebase.`);
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting image from Firebase:", error);
+    return { success: false, error: error.message };
+  }
+};
 // upload Images to Firebase
 const uploadToFirebase = async (imageUri, setProgress) => {
   try {
@@ -104,8 +122,37 @@ const addListings = async (listing, onUploadProgress) => {
   }
 };
 
+// DELETE Command
+const deleteListing = async (userId, listingId, images) => {
+  try {
+    // Delete the image from Firebase
+    for (const imageName of images) {
+      const result = await deleteFromFirebase(imageName);
+      if (!result.success) {
+        console.error(`Failed to delete image ${imageName}: ${result.error}`);
+        return { ok: false, error: "Failed to delete associated images." };
+      }
+    }
+
+    const response = await client.delete(
+      `/user/${userId}/roomateListings/${listingId}`
+    );
+    if (response.ok) {
+      console.log("Listing deleted successfully");
+      return { ok: true };
+    } else {
+      console.error("Failed to delete listing from server.");
+      return { ok: false, error: "Failed to delete listing from server." };
+    }
+  } catch (error) {
+    console.error("Error deleting listing:", error.message);
+    return { ok: false, error: "An unexpected error occurred." };
+  }
+};
+
 export default {
   addListings,
   getListings,
   getUserListings,
+  deleteListing,
 };

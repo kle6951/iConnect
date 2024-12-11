@@ -128,7 +128,7 @@ const deleteListing = async (userId, listingId, images) => {
   try {
     // Delete the image from Firebase
     for (const imageName of images) {
-      const result = await deleteFromFirebase(imageName); 
+      const result = await deleteFromFirebase(imageName);
       if (!result.success) {
         console.error(`Failed to delete image ${imageName}: ${result.error}`);
         return { ok: false, error: "Failed to delete associated images." };
