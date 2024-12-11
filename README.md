@@ -1,8 +1,26 @@
-# Welcome to your Expo app 👋
+# Welcome to iConnect app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-## Get started
+## Description
+
+Here’s a refined version of your description:
+
+iConnect is a social networking application tailored for university students, designed to enhance engagement with campus life. The app helps students stay connected and actively participate in university activities.
+
+Key features of iConnect include:
+
+    Home Page: Stay up-to-date with all the latest posts regarding upcoming events, exciting news, and activities shared by fellow students. It’s a central hub to discover what's happening around campus.
+
+    Activities Page: Explore various campus markets and clubs (with more to come!). Currently, the app features two markets:
+        Textbook Market: Find used textbooks for sale by other students, making it easy to save on study materials.
+        Find My Roommate: Connect with potential roommates or housemates to ease financial burdens and create a comfortable living situation.
+
+    Account Page: View and manage all of your listings in both the Textbook and Find My Roommate markets. You can easily delete any listings you no longer need.
+
+## Table of Contents
+
+## How to get started
 
 1. Install dependencies
 
@@ -35,16 +53,26 @@ npm run reset-project
 
 This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
+## Credits
 
-To learn more about developing your project with Expo, look at the following resources:
+    Khanh Le – Project Creator and Maintainer (kle6951@mtroyal.ca)
+    Yasaman Amannejad - Project Supervisor (yamannejad@mtroyal.ca)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Special thanks to the following resources:
 
-## Join the community
+    Icons and Images:
 
-Join our community of developers creating universal apps.
+      Icons sourced from Expo Vector Icons.
+      Images and graphics sourced from various internet sources and Canvas.
+      Animations powered by Lottie.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+    Libraries and Tools:
+        React Native – For building the mobile application.
+        Expo – For managing and running the app.
+        React Navigation – For the navigation system.
+        Xcode – For iOS simulator and development.
+        Postman – For API testing.
+        Google Cloud – For database storage.
+        Firebase – For user authentication and file storage.
+        MySQL – For database management.
+        REST API – For communication between the frontend and backend.
