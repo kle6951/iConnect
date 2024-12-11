@@ -1,7 +1,7 @@
 import { create } from "apisauce";
 import cache from "../utility/cache";
 const apiCilent = create({
-  baseURL: "http://34.133.114.74:8080/api",
+  baseURL: "http://35.239.251.204:8080/api",
   timeout: 30000, // 30 seconds
 });
 const get = apiCilent.get;

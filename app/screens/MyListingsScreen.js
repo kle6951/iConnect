@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, StyleSheet, ScrollView, RefreshControl} from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  ScrollView,
+  RefreshControl,
+  Alert,
+} from "react-native";
 import Screen from "../components/Screen";
 import AppText from "../components/AppText";
 import MyListCard from "../components/cards/MyListCard";
@@ -14,14 +20,50 @@ function MyListingScreen({ navigation }) {
   const getListings = useApi(listingsApi.getUserListings);
 
   useEffect(() => {
-    getListings.request(1, 2, 3);
+    getListings.request(1, 2, 3); 
   }, []);
 
   const handleRefresh = async () => {
     setRefreshing(true);
-    await getListings.request(1, 2, 3);
+    await getListings.request(1, 2, 3); 
     setRefreshing(false);
   };
+
+  const handleDelete = async (userId, listingId, images) => {
+    Alert.alert(
+      "Delete Listing",
+      "Are you sure you want to delete this listing and its images?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          onPress: async () => {
+            const imagesToDelete = images.map((image) => {
+              const decodedImageUrl = decodeURIComponent(image);
+              const imageName = decodedImageUrl.split("/").pop().split("?")[0];
+              return imageName;
+            });
+  
+            console.log(imagesToDelete); 
+  
+            const deleteResult = await listingsApi.deleteListing(
+              userId,
+              listingId,
+              imagesToDelete
+            );
+  
+            if (deleteResult.ok) {
+              alert("Listing deleted successfully.");
+              await handleRefresh();
+            } else {
+              alert(deleteResult.error || "Failed to delete the listing.");
+            }
+          },
+          style: "destructive",
+        },
+      ]
+    );
+  };  
 
   return (
     <Screen style={styles.container}>
@@ -53,12 +95,17 @@ function MyListingScreen({ navigation }) {
             renderItem={({ item }) => {
               const images = JSON.parse(item.images);
               const imageURL = images[0]?.url;
+              const imageURLs = images.map((image) => image.url);
+
               return (
                 <MyListCard
                   title={item.title}
                   image={imageURL}
                   onPress={() =>
                     navigation.navigate("MyListDetailScreen", { item })
+                  }
+                  onDelete={() =>
+                    handleDelete(item.user_id, item.id, imageURLs)
                   }
                 />
               );

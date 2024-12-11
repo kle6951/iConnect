@@ -1,11 +1,30 @@
 import client from "./client";
 import { storage } from "./firebaseConfig";
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import {
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+  deleteObject,
+} from "firebase/storage";
 import authStorage from "../auth/storage";
 
 const endPoint = "/listings";
 
-// upload Images to Firebase
+// Delete images from Firebase
+const deleteFromFirebase = async (imageName) => {
+  try {
+    const imageRef = ref(storage, `listingsImages/${imageName}`);
+    await deleteObject(imageRef);
+
+    console.log(`Image ${imageName} deleted successfully from Firebase.`);
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting image from Firebase:", error);
+    return { success: false, error: error.message };
+  }
+};
+
+// Upload images to Firebase
 const uploadToFirebase = async (imageUri, setProgress) => {
   try {
     const response = await fetch(imageUri);
@@ -25,7 +44,6 @@ const uploadToFirebase = async (imageUri, setProgress) => {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          // console.log(`Upload is ${progress}% done`);
           if (setProgress) setProgress(progress); // Update progress in the parent component
         },
         (error) => {
@@ -51,7 +69,7 @@ const getListings = () => client.get(endPoint);
 // GET user's listings
 const getUserListings = async () => {
   const user = await authStorage.getUser();
-  const endpoint = "/user/" + user.id + "/listings";
+  const endpoint = `/user/${user.id}/listings`;
   return client.get(endpoint);
 };
 
@@ -92,12 +110,11 @@ const addListings = async (listing, onUploadProgress) => {
       data.append("location", JSON.stringify(listing.location));
     }
 
-    // console.log("Preparing to upload listing to endpoint...");
     const response = await client.post(endPoint, data, {
       onUploadProgress: (progress) =>
         onUploadProgress(progress.loaded / progress.total),
     });
-    // console.log("Listing upload completed:", response);
+
     return response;
   } catch (error) {
     console.error("Error posting listing:", error.message);
@@ -106,8 +123,37 @@ const addListings = async (listing, onUploadProgress) => {
   }
 };
 
+// DELETE Command
+const deleteListing = async (userId, listingId, images) => {
+  try {
+    // Delete the image from Firebase
+    for (const imageName of images) {
+      const result = await deleteFromFirebase(imageName); 
+      if (!result.success) {
+        console.error(`Failed to delete image ${imageName}: ${result.error}`);
+        return { ok: false, error: "Failed to delete associated images." };
+      }
+    }
+
+    const response = await client.delete(
+      `/user/${userId}/listings/${listingId}`
+    );
+    if (response.ok) {
+      console.log("Listing deleted successfully");
+      return { ok: true };
+    } else {
+      console.error("Failed to delete listing from server.");
+      return { ok: false, error: "Failed to delete listing from server." };
+    }
+  } catch (error) {
+    console.error("Error deleting listing:", error.message);
+    return { ok: false, error: "An unexpected error occurred." };
+  }
+};
+
 export default {
   addListings,
   getListings,
   getUserListings,
+  deleteListing,
 };
